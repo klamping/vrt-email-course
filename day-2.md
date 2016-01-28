@@ -41,7 +41,7 @@ After that is complete, start the server:
 ./node_modules/.bin/selenium-standalone start
 ```
 
-This will be an constantly-running service, so you'll need to open a new command line window to continue work. You can stop the server by pressing `Ctrl-C`.
+This will be a constantly-running service, so you'll need to open a new command line window to continue work. You can stop the server by pressing `Ctrl-C`.
 
 * If you're interested in why we reference `./node_modules/bin/` and a way around that, read up [npm scripts](http://firstdoit.com/npm-scripts/). 
 
@@ -123,7 +123,7 @@ browser
 
 Here we asked our browser to get the title of the page (the aptly named `getTitle` command), and then logged that value out using the generic `then` command. 
 
-*Note: If you're not familiar with JavaScript Promises, this syntax may look a little strange. For the sake of brevity, we're not going to get in to the details of it in this email. Fortunately there are [a lot of resources on JavaScript Promises](http://lmgtfy.com/?q=javascript+promise+tutorials) already out there for you to find*.
+*Note: If you're not familiar with JavaScript Promises, this syntax may look a little strange. For the sake of brevity, we're not going to get into the details of it in this email. Fortunately there are [a lot of resources on JavaScript Promises](http://lmgtfy.com/?q=javascript+promise+tutorials) already out there for you to find*.
 
 Okay, we need to see all this in action to really grasp what's going on. Just to recap, here's what your `tests.js` file should look like:
 
@@ -144,7 +144,7 @@ browser
 	});
 ```
 
-Hopefully yours matches that. If so, it's time to run the test! You can do so by asking node (via the command line) to ever so kindly to execute your code:
+Hopefully yours matches that. If so, it's time to run the test! You can do so by asking node (via the command line) to ever so kindly execute your code:
 
 ```
 node tests.js
@@ -183,7 +183,7 @@ browser
 
 Run the same Node command and your tests will run, but this time the browser will close automatically, leaving you with a clean screen.
 
-### Tomorrow's Outlook  
+### Tomorrow's outlook  
 
 So, how does it feel to have programmatically taken control of a  browser? A little awesome, right? Okay, if you're underwhelmed, that's because we didn't really test much. We only peaked at the page title then closed everything down before we got ourselves in trouble.
 
