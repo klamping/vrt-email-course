@@ -2,13 +2,13 @@ Hi, and welcome to the first day of five in the "Visual Regression Testing" e-ma
 
 Over the next week, we'll get you started understanding the essentials of writing automated functional tests using WebdriverIO.
 
-At the end of the week, you'll have all the knowledge you'll need to write an elementary set of tests, which you'll greatly appreciate during your next site update.
+At the end of the week, you will have all the knowledge you need to write an elementary set of tests, and you may be surprised just how handy they are during your next site update.
 
-You'll be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in my book.
+You may be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in my book.
 
 ## Some Terminology
 
-We'll kick off day one by expanding your vocabulary with a few new terms that we'll be repeating over and over throughout the course.
+Let's kick off day one by expanding your vocabulary with a few new terms that we'll be repeating over and over throughout the course.
 
 ### Regressions
 
@@ -22,11 +22,11 @@ While you definitely want to put the new code through the wringer, it's also imp
 
 ### Automation
 
-Do you hear automation and think of robots replacing assembly line workers? Does it make your think that some automated script will replace your job?
+Do you hear automation and think of robots replacing assembly line workers? Does it make you think that some automated script will replace your job?
 
 While the goal of automation is to test a website without a human clicking links and entering text, it in no way can take the place of hard-working people.
 
-First off, someone has to write the automation and know how to keep it up to date. That can easily be a full-time job on a large enough application.
+First of all, someone has to write the automation and know how to keep it up to date. That can easily be a full-time job on a large enough application.
 
 But there is also a lot of nuance to tests. Checking to see if an animation worked as designed is difficult (and maybe impossible) right now with automated tests.
 
@@ -68,7 +68,7 @@ I really believe in the benefits of automated testing, so I should probably thro
 - You can't test everything, because, again, websites are complicated.
 - Automation doesn't work in all browsers, because some browsers just don't support it. You're best bets are going to be Firefox, Chrome and Internet Explorer.
 
-Basically, it's not magic (although it feels like it at times). There are certain things you just won't be able to test, so it's best not to fight that fact. 
+Basically, it's not magic (although it feels like it at times). There are certain things you just won't be able to automate testing for, so it's best not to fight that fact. 
 
 ## The Technology
 
