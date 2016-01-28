@@ -1,4 +1,4 @@
-Day 2 is here; I hope your ready to dig in. Let's gets started with some installations!
+Day 2 is here; I hope you're ready to dig in. Let's get started with some installations!
 
 Assuming you have Node.js set up and a folder created to store all of our work, open up a command line in that folder and run:
 
@@ -6,7 +6,7 @@ Assuming you have Node.js set up and a folder created to store all of our work, 
 npm install webdriverio webdrivercss selenium-standalone
 ```
 
-This will install the needed tools to run out tests. They are:
+This will install the needed tools to run your tests. They are:
 
 ## WebdriverIO 
 
