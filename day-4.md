@@ -4,7 +4,7 @@ Today, we're going to take regression testing one step further. Actually, we're 
 
 Websites aren't static. When you visit one, you're taking all sorts of actions. You're clicking buttons, entering text, dragging boxes around. There's a lot to do!
 
-So far though, our tests haven't done much. We've simply loaded our page, checked a title, and taken a few screenshots. What about our dropdown menus? What about form fields? Certainly we can test those things.
+So far though, our tests haven't done much. We've simply loaded our page, checked a title, and taken a few screenshots. What about our dropdown menus? What about form fields? Certainly we can test those things as well!
 
 We can! Not only that, we also take another set of screenshots after those actions for another level of visual tests. Here's what our tests for the main navigation on our page could look like:
 
