@@ -1,1 +1,4 @@
-It's Day 6!
+Wrap up
+When to run tests
+Where to run tests
+What possibilities lie out there
