@@ -1,4 +1,4 @@
-Failing on Purpose
+# Failing on Purpose
 
 So far, we've been doing our fair share of manual work when running the tests. Every time we execute our test suite, we have to check the screenshots folder for diffs and read the console logs to verify the right messages appear.
 
