@@ -190,3 +190,5 @@ So, how does it feel to have programmatically taken control of a  browser? A lit
 I promise tomorrow that we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and a very simple visual test.
 
 If you can't wait until then, take a look at [the WebdriverIO API page](http://webdriver.io/api.html) to see a full list of commands available for use.
+
+*If you enjoyed these lessons, consider sharing this course with your friends*

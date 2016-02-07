@@ -225,3 +225,6 @@ browser
 Did you catch all that? We just put a lot of pieces together to make two useful tests. You can easily expand on this to round out your tests with even more depth.
 
 Tomorrow, we're going to take a look at how to make catching failures a little less manual. Until then, write some in-depth tests on your own!
+
+
+*If you enjoyed these lessons, consider sharing this course with your friends*

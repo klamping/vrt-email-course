@@ -29,3 +29,6 @@ If visual changes occur and are warranted, the following steps will need to be t
 2. Run the test suite again.
 3. Add/commit all updated images.
 4. Have another team member review the new images. [Github has useful image diff tools](https://github.com/blog/817-behold-image-view-modes) to help compare the changes. 
+
+
+*If you enjoyed these lessons, consider sharing this course with your friends*

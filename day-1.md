@@ -89,3 +89,5 @@ There are a few requirements you'll need to have going before getting started:
 ## What's Next?
 
 Phew, you've made it through the entire first day without any code being shown. Don't worry, I've saved all that for tomorrow, where we'll take a look at writing your very first automated test (I'm so excited for you!).
+
+*If you enjoyed these lessons, consider sharing this course with your friends*
