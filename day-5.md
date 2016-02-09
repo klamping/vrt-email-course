@@ -78,9 +78,9 @@ The `webdrivercss` command has a special configuration which allows you to run a
 ```js
 browser
 	... more tests here ...
-  .webdrivercss("Login Default", loginForm,	function (err, shot) {
-	  assert.ifError(err);
-	  assert.ok(shot.isWithinMisMatchTolerance);
+	 .webdrivercss("Login Default", loginForm, function (err, shot) {
+		assert.ifError(err);
+		assert.ok(shot.isWithinMisMatchTolerance);
 	});
 ```
 
@@ -96,9 +96,9 @@ It would be a waste of email to get in to the real details of it all, so you're 
 ```js
 browser
 	... more tests here ...
-  .webdrivercss("Login Default", loginForm,	function (err, shot) {
-	  assert.ifError(err);
-	  // much more complex code assertion goes here
+	.webdrivercss("Login Default", loginForm, function (err, shot) {
+		assert.ifError(err);
+		// TODO much more complex code assertion goes here
 	});
 ```
 
@@ -106,17 +106,17 @@ While this is a much more adaptable solution, it's pretty verbose. Seeing as we 
 
 ```js
 function assertShots (err, shot) {
-  assert.ifError(err);
-  // much more complex code assertion goes here
+	assert.ifError(err);
+	// TODO much more complex code assertion goes here
 }
 
 browser
 	... more tests here ...
-  .webdrivercss("Login Default", loginForm,	assertShots)
+	.webdrivercss("Login Default", loginForm, assertShots)
 	.setValue(".login .username", "admin")
-  .webdrivercss("Login Username", loginForm,	assertShots)
+	.webdrivercss("Login Username", loginForm, assertShots)
 	.setValue(".login .password", "hunter2")
-  .webdrivercss("Login Username Password", loginForm,	assertShots);
+	.webdrivercss("Login Username Password", loginForm, assertShots);
 ```
 
 In each of our WebdriverCSS calls we pass in our assertion function, which handles programmatically checking that everything turned out as planned.
