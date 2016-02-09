@@ -43,7 +43,7 @@ After that is complete, start the server:
 
 This will be a constantly-running service, so you'll need to open a new command line window to continue work. You can stop the server by pressing `Ctrl-C`.
 
-* If you're interested in why we reference `./node_modules/bin/` and a way around that, read up [npm scripts](http://firstdoit.com/npm-scripts/). 
+* If you're interested in why we reference `./node_modules/bin/` and a way around that, read up [npm scripts](http://firstdoit.com/npm-scripts/).
 
 ## Let's write some tests
 
@@ -59,7 +59,7 @@ Now that we have our `wdio` object, our next step is to set up our browser insta
 
 ```
 var options = {
-	desiredCapabilities: { 
+	desiredCapabilities: {
 		browserName: 'firefox'
 	}
 };
@@ -81,7 +81,7 @@ Here's everything we have so far:
 ```
 var wdio = require("webdriverio");
 var options = {
-	desiredCapabilities: { 
+	desiredCapabilities: {
 		browserName: 'firefox'
 	}
 };
@@ -103,7 +103,7 @@ browser
 A few things:
 
 1. I reorganized the code to have each command on a separate line. This helps with readability.
-2. I "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jquery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those). 
+2. I "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jquery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those).
 3. I used the `url` command to do something in the browser. How awesome!
 
 ### Check the title
@@ -121,7 +121,7 @@ browser
 	});
 ```
 
-Here we asked our browser to get the title of the page (the aptly named `getTitle` command), and then logged that value out using the generic `then` command. 
+Here we asked our browser to get the title of the page (the aptly named `getTitle` command), and then logged that value out using the generic `then` command.
 
 *Note: If you're not familiar with JavaScript Promises, this syntax may look a little strange. For the sake of brevity, we're not going to get into the details of it in this email. Fortunately there are [a lot of resources on JavaScript Promises](http://lmgtfy.com/?q=javascript+promise+tutorials) already out there for you to find*.
 
@@ -130,7 +130,7 @@ Okay, we need to see all this in action to really grasp what's going on. Just to
 ```
 var wdio = require("webdriverio");
 var options = {
-	desiredCapabilities: { 
+	desiredCapabilities: {
 		browserName: 'firefox'
 	}
 };
