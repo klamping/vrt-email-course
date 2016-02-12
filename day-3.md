@@ -18,7 +18,7 @@ We are going to need to make a couple changes to our `tests.js` file, the first 
 
 ```js
 var wdio = require("webdriverio");
-var webdrivercss = require('webdrivercss');
+var webdrivercss = require("webdrivercss");
 ```
 
 We are now leveraging the power of WebdriverIO along with our visual regression framework, WebdriverCSS.
@@ -34,9 +34,9 @@ webdrivercss.init(browser);
 We are going to just leave WebdriverCSS at its default settings, but if you wanted to update the instance options like we did with `wdio.remote(options)` you can pass those options in as an object after the browser variable.
 
 ```js
-require('webdrivercss').init(browser, {
-    screenshotRoot: 'my-shots',
-    failedComparisonsRoot: 'diffs',
+require("webdrivercss").init(browser, {
+    screenshotRoot: "my-shots",
+    failedComparisonsRoot: "diffs",
     misMatchTolerance: 0.05,
     screenWidth: [320,480,640,1024],
     updateBaseline: false
@@ -57,7 +57,7 @@ Just like the `.url()` and the `.getTitle()` function we used yesterday, `.webdr
 browser
   .init()
   .url("https://learn.visualregressiontesting.com")
-  .webdrivercss('some_id', [{options}], callback);
+  .webdrivercss("some_id", [{options}], callback);
 ```
 
 The function takes 3 different parameters:
@@ -82,14 +82,14 @@ Now that we've explained the parts of this function, let's see it in action:
 browser
   .init()
   .url("https://learn.visualregressiontesting.com")
-  .webdrivercss('homepage',[
+  .webdrivercss("homepage",[
         {
-            name: 'header',
-            elem: '.header'
+            name: "header",
+            elem: ".header"
         },
         {
-            name: 'benefits',
-            elem: '.benefits',
+            name: "benefits",
+            elem: ".benefits",
             screenWidth: [320,640,1024]
         }
     ])

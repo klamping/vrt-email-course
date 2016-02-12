@@ -60,7 +60,7 @@ Now that we have our `wdio` object, our next step is to set up our browser insta
 ```
 var options = {
 	desiredCapabilities: {
-		browserName: 'firefox'
+		browserName: "firefox"
 	}
 };
 var browser = wdio.remote(options);
@@ -82,7 +82,7 @@ Here's everything we have so far:
 var wdio = require("webdriverio");
 var options = {
 	desiredCapabilities: {
-		browserName: 'firefox'
+		browserName: "firefox"
 	}
 };
 var browser = wdio.remote(options);
@@ -117,7 +117,7 @@ browser
 	.init()
 	.url("http://learn.visualregressiontesting.com")
 	.getTitle().then(function(title) {
-	    console.log('Title is: ' + title);
+	    console.log("Title is: " + title);
 	});
 ```
 
@@ -131,7 +131,7 @@ Okay, we need to see all this in action to really grasp what's going on. Just to
 var wdio = require("webdriverio");
 var options = {
 	desiredCapabilities: {
-		browserName: 'firefox'
+		browserName: "firefox"
 	}
 };
 var browser = wdio.remote(options);
@@ -140,7 +140,7 @@ browser
 	.init()
 	.url("http://learn.visualregressiontesting.com")
 	.getTitle().then(function(title) {
-	    console.log('Title is: ' + title);
+	    console.log("Title is: " + title);
 	});
 ```
 
@@ -176,7 +176,7 @@ browser
 	.init()
 	.url("http://learn.visualregressiontesting.com")
 	.getTitle().then(function(title) {
-	    console.log('Title is: ' + title);
+	    console.log("Title is: " + title);
 	})
 	.end();
 ```
