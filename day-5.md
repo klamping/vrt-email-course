@@ -51,15 +51,15 @@ How does this relate to our needs? We can throw an assert in our `getTitle` and 
 
 ```js
 browser
-	.url("http://visualregressiontesting.com")
-  .getTitle()
-  .then(function(title){ 
-		assert.equal(title, "Visual Regression Testing");
-  })
-	.isVisible(".main-nav")
-  .then(function(isNavVisible){ 
-		assert.ok(isNavVisible);
-  });
+    .url("http://visualregressiontesting.com")
+    .getTitle()
+    .then(function(title){ 
+        assert.equal(title, "Visual Regression Testing");
+    })
+    .isVisible(".main-nav")
+    .then(function(isNavVisible){ 
+        assert.ok(isNavVisible);
+    });
 ```
 
 `assert.ok` checks that the value passed in is truthy, which is what we want `isNavVisible` to be.
@@ -77,11 +77,11 @@ The `webdrivercss` command has a special configuration which allows you to run a
 
 ```js
 browser
-	... more tests here ...
-	 .webdrivercss("Login Default", loginForm, function (err, shot) {
-		assert.ifError(err);
-		assert.ok(shot.isWithinMisMatchTolerance);
-	});
+    ... more tests here ...
+    .webdrivercss("Login Default", loginForm, function (err, shot) {
+        assert.ifError(err);
+        assert.ok(shot.isWithinMisMatchTolerance);
+    });
 ```
 
 We assert two things:
@@ -95,28 +95,28 @@ It would be a waste of email to get in to the real details of it all, so you're 
 
 ```js
 browser
-	... more tests here ...
-	.webdrivercss("Login Default", loginForm, function (err, shot) {
-		assert.ifError(err);
-		// TODO much more complex code assertion goes here
-	});
+    ... more tests here ...
+    .webdrivercss("Login Default", loginForm, function (err, shot) {
+        assert.ifError(err);
+        // TODO much more complex code assertion goes here
+    });
 ```
 
 While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same snippet of code throughout our tests, we can make it a standalone function and call it when needed:
 
 ```js
 function assertShots (err, shot) {
-	assert.ifError(err);
-	// TODO much more complex code assertion goes here
+    assert.ifError(err);
+    // TODO much more complex code assertion goes here
 }
 
 browser
-	... more tests here ...
-	.webdrivercss("Login Default", loginForm, assertShots)
-	.setValue(".login .username", "admin")
-	.webdrivercss("Login Username", loginForm, assertShots)
-	.setValue(".login .password", "hunter2")
-	.webdrivercss("Login Username Password", loginForm, assertShots);
+    ... more tests here ...
+    .webdrivercss("Login Default", loginForm, assertShots)
+    .setValue(".login .username", "admin")
+    .webdrivercss("Login Username", loginForm, assertShots)
+    .setValue(".login .password", "hunter2")
+    .webdrivercss("Login Username Password", loginForm, assertShots);
 ```
 
 In each of our WebdriverCSS calls we pass in our assertion function, which handles programmatically checking that everything turned out as planned.

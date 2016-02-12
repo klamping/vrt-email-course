@@ -24,7 +24,7 @@ Just like our previous actions, we're going to use a WebdriverIO command to clic
 
 ```js
 browser
-	.click(".main-nav")
+    .click(".main-nav")
 ```
 
 This works almost exactly the same as a left click with your mouse button. That's the beauty of Selenium. It's as if you took the action yourself!
@@ -33,14 +33,14 @@ Now that we've clicked the nav, it should be open. Let's add another WebdriverCS
 
 ```js
 var mainNav = {
-	name: "Main Nav",
-	selector: ".main-nav"
+    name: "Main Nav",
+    selector: ".main-nav"
 };
 
 browser
-  .webdrivercss("Main Nav Default", mainNav)
-	.click(".main-nav")
-  .webdrivercss("Main Nav Open", mainNav)
+    .webdrivercss("Main Nav Default", mainNav)
+    .click(".main-nav")
+    .webdrivercss("Main Nav Open", mainNav)
 ```
 
 Look at that! You now have a visual regression test for two states of your navigation. You could easily take this further if you have more than one level in your navigation hierarchy (hello, mega dropdowns!)
@@ -49,23 +49,23 @@ For our needs, we want to see what the page looks like after clicking a menu ite
 
 ```js
 var mainNav = {
-	name: "Main Nav",
-	selector: ".main-nav"
+    name: "Main Nav",
+    selector: ".main-nav"
 };
 
 browser
-  .webdrivercss("Main Nav Default", mainNav)
-	.click(".main-nav")
-  .webdrivercss("Main Nav Open", mainNav)
-	.click(".main-nav .about")
-	// WebdriverIO will wait here until the "About" page loads
-	.webdrivercss("Main Nav - About Page", mainNav)
-	.getUrl()
-  .then(function(url) {
-    console.log(url);
-    // outputs something like:
-    // "http://mysite.com/about"
-	});
+    .webdrivercss("Main Nav Default", mainNav)
+    .click(".main-nav")
+    .webdrivercss("Main Nav Open", mainNav)
+    .click(".main-nav .about")
+    // WebdriverIO will wait here until the "About" page loads
+    .webdrivercss("Main Nav - About Page", mainNav)
+    .getUrl()
+    .then(function(url) {
+        console.log(url);
+        // outputs something like:
+        // "http://mysite.com/about"
+    });
 ```
 
 We threw in the `getUrl` command just to validate that we're on the right page. We also could have checked the page title using `getTitle` to verify that way.
@@ -80,30 +80,29 @@ Say you want to test the login form on your site. You can grab a screenshot of t
 
 ```js
 var loginForm = {
-	name: "Login",
-	selector: "form.login"
+    name: "Login",
+    selector: "form.login"
 };
 
 browser
-  .webdrivercss("Login Default", loginForm)
+    .webdrivercss("Login Default", loginForm)
 ```
 
 Then, you can set the text of the username using [the `setValue` command](http://webdriver.io/api/action/setValue.html):
 
-
 ```js
 browser
-  .webdrivercss("Login Default", loginForm)
-	.setValue(".login .username", "admin")
+    .webdrivercss("Login Default", loginForm)
+    .setValue(".login .username", "admin")
 ```
 
 Why not take a screenshot of this state?
 
 ```js
 browser
-  .webdrivercss("Login Default", loginForm)
-	.setValue(".login .username", "admin")
-  .webdrivercss("Login w/Username", loginForm)
+    .webdrivercss("Login Default", loginForm)
+    .setValue(".login .username", "admin")
+    .webdrivercss("Login w/Username", loginForm)
 ```
 
 It's important to note here that `setValue` only works with "interactable" elements
@@ -112,11 +111,11 @@ Let's repeat that with the password:
 
 ```js
 browser
-  .webdrivercss("Login Default", loginForm)
-	.setValue(".login .username", "admin")
-  .webdrivercss("Login Username", loginForm)
-	.setValue(".login .password", "hunter2")
-  .webdrivercss("Login Username Password", loginForm)
+    .webdrivercss("Login Default", loginForm)
+    .setValue(".login .username", "admin")
+    .webdrivercss("Login Username", loginForm)
+    .setValue(".login .password", "hunter2")
+    .webdrivercss("Login Username Password", loginForm)
 ```
 
 #### Submitting Forms
@@ -125,13 +124,13 @@ You could submit the form by running `.click` on the submit button, or you can u
 
 ```js
 var loginForm = {
-	name: "Login",
-	selector: "form.login"
+    name: "Login",
+    selector: "form.login"
 };
 
 browser
-  ... test code here ...
-	.submitForm(loginForm.selector)
+    ... test code here ...
+    .submitForm(loginForm.selector)
 ```
 
 #### Looking for Elements
@@ -140,85 +139,21 @@ Most forms will show an error if the wrong username or password was used. We can
 
 ```js
 browser
-	.setValue(".login .username", "admin")
-	.setValue(".login .password", "badpassword")
-	.submitForm(loginForm.selector)
-  .isVisible(".alert.error")
-  .then(function(isErrorVisible) {
-		console.log("Is error message visible?", isErrorVisible);
-		// Should print "Is error message visible? True"
-	})
+    .setValue(".login .username", "admin")
+    .setValue(".login .password", "badpassword")
+    .submitForm(loginForm.selector)
+    .isVisible(".alert.error")
+    .then(function(isErrorVisible) {
+    console.log("Is error message visible?", isErrorVisible);
+    // Should print "Is error message visible? True"
+    })
 ```
 
 This works much the same way the `getTitle` command shown in Day 2 works. The value of `isVisible` is passed to the `then` command, which we can use to display our result.
 
 ## The Full Tests
 
-That sure was a lot, huh? Let's see what the test file in its entirety looks like:
-
-### Navigation Test
-
-```js
-var wdio = require("webdriverio");
-
-var options = {
-	desiredCapabilities: { 
-		browserName: 'firefox'
-	}
-};
-
-var browser = wdio.remote(options);
-
-var mainNav = {
-	name: "Main Nav",
-	selector: ".main-nav"
-};
-
-browser
-	.url("http://mysite.com")
-  .webdrivercss("Main Nav Default", mainNav)
-	.click(".main-nav")
-  .webdrivercss("Main Nav Open", mainNav)
-	.click(".main-nav .about")
-	.webdrivercss("Main Nav - About Page", mainNav)
-	.getUrl()
-  .then(function(url) {
-    console.log(url);
-	});
-```
-
-### Login Form Test
-```js
-var wdio = require("webdriverio");
-
-var options = {
-	desiredCapabilities: { 
-		browserName: 'firefox'
-	}
-};
-
-var browser = wdio.remote(options);
-var loginForm = {
-	name: "Login",
-	selector: "form.login"
-};
-
-browser
-	.url("http://mysite.com/login")
-  .webdrivercss("Login Default", loginForm)
-	.setValue(".login .username", "admin")
-  .webdrivercss("Login Username", loginForm)
-	.setValue(".login .password", "badpassword")
-	.submitForm(loginForm.selector)
-  .webdrivercss("Login Error Message", loginForm)
-  .isVisible(".alert.error")
-  .then(function(isErrorVisible) {
-		console.log("Is error message visible?", isErrorVisible);
-		// Should print "Is error message visible? True"
-	})
-	.setValue(".login .password", "hunter2")
-  .webdrivercss("Login Username Password", loginForm)
-```
+That sure was a lot, huh? Be sure to check out [the Day 4 code samples]() to see the entirety of the navigation and login tests. 
 
 ## Finishing up
 

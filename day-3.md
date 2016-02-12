@@ -34,7 +34,7 @@ webdrivercss.init(browser);
 We are going to just leave WebdriverCSS at its default settings, but if you wanted to update the instance options like we did with `wdio.remote(options)` you can pass those options in as an object after the browser variable.
 
 ```js
-require('webdrivercss').init(client, {
+require('webdrivercss').init(browser, {
     screenshotRoot: 'my-shots',
     failedComparisonsRoot: 'diffs',
     misMatchTolerance: 0.05,

@@ -16,20 +16,14 @@ browser
   .init()
   .url("https://learn.visualregressiontesting.com")
   .webdrivercss('homepage',[
-        {
-            name: 'header',
-            elem: '.header'
-        },
-        {
-            name: 'benefits',
-            elem: '.benefits',
-            screenWidth: [320,640,1024]
-        }
-    ], function(err, res) {
-        assert.ifError(err);
-        assert.ok(res.header[0].isWithinMisMatchTolerance);
-        assert.ok(res.benefits[0].isWithinMisMatchTolerance);
-        assert.ok(res.benefits[1].isWithinMisMatchTolerance);
-        assert.ok(res.benefits[2].isWithinMisMatchTolerance);
-    })
+    {
+      name: 'header',
+      elem: '.header'
+    },
+    {
+      name: 'benefits',
+      elem: '.benefits',
+      screenWidth: [320,640,1024]
+    }
+  ])
   .end();
