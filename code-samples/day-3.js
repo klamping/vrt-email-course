@@ -1,10 +1,10 @@
 var wdio = require("webdriverio");
-var assert = require('assert');
-var webdrivercss = require('webdrivercss');
+var assert = require("assert");
+var webdrivercss = require("webdrivercss");
 
 var options = {
   desiredCapabilities: {
-    browserName: 'firefox'
+    browserName: "firefox"
   }
 };
 
@@ -15,14 +15,14 @@ webdrivercss.init(browser);
 browser
   .init()
   .url("https://learn.visualregressiontesting.com")
-  .webdrivercss('homepage',[
+  .webdrivercss("homepage",[
     {
-      name: 'header',
-      elem: '.header'
+      name: "header",
+      elem: ".header"
     },
     {
-      name: 'benefits',
-      elem: '.benefits',
+      name: "benefits",
+      elem: ".benefits",
       screenWidth: [320,640,1024]
     }
   ])

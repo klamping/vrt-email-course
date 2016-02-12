@@ -2,13 +2,13 @@ var wdio = require("webdriverio");
 
 var options = {
   desiredCapabilities: {
-    browserName: 'firefox'
+    browserName: "firefox"
   }
 };
 
 var browser = wdio.remote(options);
 
-require('webdrivercss').init(browser, {
+require("webdrivercss").init(browser, {
   screenWidth: [320,480,640,1024]
 });
 
