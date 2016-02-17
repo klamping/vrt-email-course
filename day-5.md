@@ -2,11 +2,11 @@
 
 So far, we've been doing our fair share of manual work when running the tests. Every time we execute our test suite, we have to check the screenshots folder for diffs and read the console logs to verify the right messages appear.
 
-In our attempt to automate our work, we're not really automated it. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions".
+In our attempt to automate our work, we haven't really automated it yet, because the program does not report errors and prevent mistakes from being deployed. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions."
 
 ## What are Assertions
 
-Assertions allows us to programmatically compare values. They're a way to say "x should equal y" or "z should be larger than x".
+Assertions allow us to programmatically compare values. They're no different than regular if statements. You can say "x should equal y" or "z should be larger than x".
 
 In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and so much more.
 
