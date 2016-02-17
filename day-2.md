@@ -103,7 +103,7 @@ browser
 A few things:
 
 1. I reorganized the code to have each command on a separate line. This helps with readability.
-2. I "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jquery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those).
+2. I "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jQuery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those).
 3. I used the `url` command to do something in the browser. How awesome!
 
 ### Check the title
