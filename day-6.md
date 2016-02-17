@@ -2,7 +2,7 @@
 
 First off, congratulations on making it to the final day. Your reward is an email with no code in it. Exciting, huh?
 
-There are quite a few topics I'd like to briefly touch upon to get your wheels spinning on what to do next. We'll stray away from the specific technical implementations to talk general ideas.
+There are quite a few topics I'd like to briefly touch upon to get your gears turning on what to do next. We'll stray away from the specific technical implementations to talk general ideas.
 
 Without further ado, here's your Top 10 list of "Ways to Test Better":
 
