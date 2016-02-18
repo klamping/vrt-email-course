@@ -49,7 +49,7 @@ If you want to learn more about those options you can read about them on the [We
 
 We're almost there! We've got all of the pieces in place, and we are ready to write our first WebdriverCSS test.
 
-Lets first look at the anatomy of the webdriverCSS command.
+Lets first look at the anatomy of the WebdriverCSS command.
 
 Just like the `.url()` and the `.getTitle()` function we used yesterday, `.webdrivercss()` is a chainable, promise based function that is typically placed directly after the `.url()` call.
 
@@ -71,8 +71,8 @@ The function takes 3 different parameters:
   5. __x__: You can specify a fixed x coordinate for your screenshot (requires width/height)
   6. __y__: You can specify a fixed y coordinate for your screenshot (requires width/height)
   7. __screenWidth__: Pass through an array of screen widths to test this element at
-  8. Various other [properties to hide, remove or exclude](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#usage) parts of the page
-3. __The Callback__: This function answers the "Ok I've got all of these images, what do I do now"? We'll leave it alone for now, but in a later email we are going to be use it to ensure that the image webdriverCSS returns matches our baseline images.
+  8. Various other [properties to hide, remove or exclude](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#usage) parts of the page, which can be useful in order to ignore dynamic components such as advertisements.
+3. __The Callback__: This function answers the "Ok I've got all of these images, what do I do now"? We'll leave it alone for now, but in a later email we are going to be use it to ensure that the image WebdriverCSS returns matches our baseline images.
 
 ### Putting it all together
 
@@ -96,7 +96,7 @@ browser
   .end();
 ```
 
-We've decided to test two different elements on our homepage, the header and the benefits section.
+We've decided to test two different elements on our homepage: the header and the benefits section.
 
 The header doesn't change over different breakpoints, but the benefits section does. So to make sure we test each of those breakpoints we use the `screenWidth` parameter in the second set of options. This will produce a total of three images, one for each viewport size.
 
@@ -109,6 +109,8 @@ To see the results of our tests, we can check out the images in the `my-shots` f
 ## Storing Baseline Images
 
 Images are stored in the Git repo like any other file. This makes is simple to share baseline images across the teams. It also allows for changes in the baseline to be tracked over time.
+
+Be aware that if team members or testing platforms are not using the same OS, the baseline images might differ slightly. A common example is that a baseline will work for local testing on OSX, but the same baseline image fails when TravisCI runs the same visual regression test since it is Linux-based.
 
 ### Accepting/Rejecting changes
 
@@ -124,7 +126,7 @@ If visual changes occurred (new images in the `diff` directory), but they weren'
 
 #### Wanted visual changes
 
-If visual changes occur and are warranted, the following steps will need to be taken to update the baseline images:
+If visual changes occur and are expected, the following steps will need to be taken to update the baseline images:
 
 1. Delete the contents of the baseline & diff image directories.
 2. Run the test suite again.
