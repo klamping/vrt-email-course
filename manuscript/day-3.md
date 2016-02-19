@@ -1,9 +1,10 @@
+# Using WebdriverCSS
+
 It's Day 3! We've spent the past two days getting things in place. Today is the day we finally get into Visual Regression Testing!
 
 Before we get going, we need to install some dependencies. GraphicsMagick is a piece of computer software required to perform image manipulation and comparison. It'll allow us to compare our baseline images with current images, and tell us if there are any differences between the two.
 
 We'll also be installing two specific versions of WebdriverIO and WebdriverCSS that are the most compatible and offer the most features.
-
 
 ## Installation
 

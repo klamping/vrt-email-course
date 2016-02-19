@@ -1,3 +1,5 @@
+# Writing Your First Test
+
 Day 2 is here; I hope you're ready to dig in. Let's get started with some installations!
 
 Assuming you have Node.js set up and a folder created to store all of our work, open up a command line in that folder.

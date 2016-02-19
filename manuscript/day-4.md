@@ -1,3 +1,5 @@
+# Advanced Test Actions
+
 Yesterday we took a look at using WebdriverCSS to capture screenshots of our page. This is the root of visual regression testing and adds a valuable tactic to our regression testing toolbox.
 
 Today, we're going to take regression testing one step further. Actually, we're going to take it several steps further by adding "steps" to our tests.
@@ -18,7 +20,7 @@ We can! Not only that, we also take another set of screenshots after those actio
 
 We've already covered steps 1 and 2, so let's get started with the rest.
 
-### Clicking around
+## Clicking around
 
 Just like our previous actions, we're going to use a WebdriverIO command to click the element we want. And just like with WebdriverCSS, we'll pass in a CSS selector to specify the element we want to click:
 
@@ -71,11 +73,11 @@ browser
 
 We threw in the `getUrl` command just to validate that we're on the right page. We also could have checked the page title using `getTitle` to verify that way.
 
-### More Actions
+## More Actions
 
 There really are a fantastic number of actions you can take. Let's preview a few of them by testing a login form!
 
-#### Entering Text in a Form
+### Entering Text in a Form
 
 Say you want to test the login form on your site. You can grab a screenshot of the form fairly easily:
 
@@ -123,7 +125,7 @@ browser
     .webdrivercss("Login Username Password", loginForm)
 ```
 
-#### Submitting Forms
+### Submitting Forms
 
 You could submit the form by running `.click` on the submit button, or you can use [the `submitForm` command](http://webdriver.io/api/action/submitForm.html):
 
@@ -138,7 +140,7 @@ browser
     .submitForm(loginForm.selector)
 ```
 
-#### Looking for Elements
+### Looking for Elements
 
 Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdrivercss calls removed for brevity):
 
