@@ -6,7 +6,7 @@ There are quite a few topics I'd like to briefly touch upon to get your gears tu
 
 Without further ado, here's your Top 10 list of "Ways to Test Better":
 
-1. You're not limited to a single browser when testing. Pass in an array of browsers in your `desiredCapabilities` configuration and WebdriverIO will run your tests in each browser.
+1. Know that you are not limited to a single browser when testing. Pass in an array of browsers in your `desiredCapabilities` configuration and WebdriverIO will run your tests in each browser.
 2. WebdriverIO has [built in support](http://webdriver.io/guide/testrunner/cloudservices.html) for Selenium cloud tools like [Sauce Labs](https://saucelabs.com/) and [Browserstack](https://www.browserstack.com/). These services are great for testing in a multitude of browsers, and provide consistency when snapping screenshots through WebdriverCSS.
 3. Automation and Continuous Integration go hand in hand. [Getting hooked in to a tool like Jenkins](http://webdriver.io/guide/testrunner/jenkins.html) or TravisCI is a great next step in improving the value of your tests.
 4. If you get set up with Jenkins, have your tests run nightly to ensure that hiccups in the internet don't affect your site.
