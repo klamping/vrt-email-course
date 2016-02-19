@@ -39,7 +39,7 @@ var mainNav = {
 
 browser
     .webdrivercss("Main Nav Default", mainNav)
-    .click(".main-nav")
+    .click(mainNav.selector)
     .webdrivercss("Main Nav Open", mainNav)
 ```
 
@@ -52,12 +52,13 @@ var mainNav = {
     name: "Main Nav",
     selector: ".main-nav"
 };
+var aboutSelector = mainNav.selector + " .about";
 
 browser
     .webdrivercss("Main Nav Default", mainNav)
-    .click(".main-nav")
+    .click(mainNav.selector)
     .webdrivercss("Main Nav Open", mainNav)
-    .click(".main-nav .about")
+    .click(aboutSelector)
     // WebdriverIO will wait here until the "About" page loads
     .webdrivercss("Main Nav - About Page", mainNav)
     .getUrl()
@@ -91,9 +92,11 @@ browser
 Then, you can set the text of the username using [the `setValue` command](http://webdriver.io/api/action/setValue.html):
 
 ```js
+var usernameSelector = loginForm.selector + " .username";
+
 browser
     .webdrivercss("Login Default", loginForm)
-    .setValue(".login .username", "admin")
+    .setValue(usernameSelector, "admin")
 ```
 
 Why not take a screenshot of this state?
@@ -101,7 +104,7 @@ Why not take a screenshot of this state?
 ```js
 browser
     .webdrivercss("Login Default", loginForm)
-    .setValue(".login .username", "admin")
+    .setValue(usernameSelector, "admin")
     .webdrivercss("Login w/Username", loginForm)
 ```
 
@@ -110,11 +113,13 @@ It's important to note here that `setValue` only works with "interactable" eleme
 Let's repeat that with the password:
 
 ```js
+var passwordSelector = loginForm.selector + " .password";
+
 browser
     .webdrivercss("Login Default", loginForm)
-    .setValue(".login .username", "admin")
+    .setValue(usernameSelector, "admin")
     .webdrivercss("Login Username", loginForm)
-    .setValue(".login .password", "hunter2")
+    .setValue(passwordSelector, "hunter2")
     .webdrivercss("Login Username Password", loginForm)
 ```
 
@@ -138,14 +143,16 @@ browser
 Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdrivercss calls removed for brevity):
 
 ```js
+var errorSelector = ".alert.error";
+
 browser
-    .setValue(".login .username", "admin")
-    .setValue(".login .password", "badpassword")
+    .setValue(usernameSelector, "admin")
+    .setValue(passwordSelector, "badpassword")
     .submitForm(loginForm.selector)
-    .isVisible(".alert.error")
+    .isVisible(errorSelector)
     .then(function(isErrorVisible) {
-    console.log("Is error message visible?", isErrorVisible);
-    // Should print "Is error message visible? True"
+        console.log("Is error message visible?", isErrorVisible);
+        // Should print "Is error message visible? True"
     })
 ```
 

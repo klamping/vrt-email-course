@@ -56,7 +56,7 @@ browser
     .then(function(title){ 
         assert.equal(title, "Visual Regression Testing");
     })
-    .isVisible(".main-nav")
+    .isVisible(mainNav.selector)
     .then(function(isNavVisible){ 
         assert.ok(isNavVisible);
     });
@@ -113,9 +113,9 @@ function assertShots (err, shot) {
 browser
     ... more tests here ...
     .webdrivercss("Login Default", loginForm, assertShots)
-    .setValue(".login .username", "admin")
+    .setValue(usernameSelector, "admin")
     .webdrivercss("Login Username", loginForm, assertShots)
-    .setValue(".login .password", "hunter2")
+    .setValue(passwordSelector, "hunter2")
     .webdrivercss("Login Username Password", loginForm, assertShots);
 ```
 
@@ -134,6 +134,7 @@ Okay, apologies for the nerd humor there. That was a lot of content to go throug
 - [Chai Assertion Library](http://chaijs.com/)
 - [Chai Webdriver](http://chaijs.com/plugins/chai-webdriver)
 - [Should.js](https://github.com/shouldjs/should.js)
+- [WebdriverCSS example with Mocha assertions](https://github.com/webdriverio/webdrivercss/blob/master/examples/webdrivercss.browserstack.with.mocha.js) written by [The Great Chris Ruppel](https://twitter.com/rupl)
 
 Tomorrow we'll wrap up the week with a "what's next" outlook. Until then, give yourself a pat on the back for completing the meat and potatoes of this course!
 

@@ -1,9 +1,19 @@
 Day 2 is here; I hope you're ready to dig in. Let's get started with some installations!
 
-Assuming you have Node.js set up and a folder created to store all of our work, open up a command line in that folder and run:
+Assuming you have Node.js set up and a folder created to store all of our work, open up a command line in that folder.
 
-```js
-npm install webdriverio webdrivercss selenium-standalone
+The first task is to create a `package.json` file, so that we can save the dependency information. You can easily do that by running:
+
+```sh
+npm init -y
+```
+
+If your new to NodeJS or unfamiliar with NPM, have a look at [their about page](https://docs.npmjs.com/getting-started/what-is-npm) for a quick intro video.
+
+Now that we've got a place to store our dependency information, let's get them installed (which will also update the `package.json` file with our dependency information). In the same command line, run:
+
+```sh
+npm install --save webdriverio webdrivercss selenium-standalone
 ```
 
 This will install the needed tools to run your tests. They are:
