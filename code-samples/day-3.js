@@ -1,5 +1,4 @@
 var wdio = require("webdriverio");
-var assert = require("assert");
 var webdrivercss = require("webdrivercss");
 
 var options = {

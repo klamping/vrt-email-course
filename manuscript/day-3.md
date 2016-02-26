@@ -1,16 +1,13 @@
 # Using WebdriverCSS
 
-It's Day 3! We've spent the past two days getting things in place. Today is the day we finally get into Visual Regression Testing!
+It's Day 3! We've spent the past two days getting things in place. Today is the day we finally get into WebdriverCSS!
 
-Before we get going, we need to install some dependencies. GraphicsMagick is a piece of computer software required to perform image manipulation and comparison. It'll allow us to compare our baseline images with current images, and tell us if there are any differences between the two.
-
-We'll also be installing two specific versions of WebdriverIO and WebdriverCSS that are the most compatible and offer the most features.
+Before we get going, we need to install some dependencies. GraphicsMagick is a piece of computer software required to perform image manipulation and comparison. It'll allow us to crop and compare our baseline images with current images, and tell us if there are any differences between the two.
 
 ## Installation
 
 1. [Install GraphicsMagick](https://github.com/webdriverio/webdrivercss#install)
-2. `npm i webdriverio@3.x`
-3. `npm i webdrivercss@2.0.0beta-rc1`
+2. You should have WebdriverCSS, WebdriverIO and selenium-standalone installed already. If not, go back and look at day 2.
 
 
 ## Setting Up WebdriverCSS
@@ -26,7 +23,7 @@ We are now leveraging the power of WebdriverIO along with our visual regression 
 
 ## Initializing the Browser...Again
 
-In order to get our `webdrivercss` command into the browser instance we created yesterday, we simply need to pass that instance into `webdrivercss.init()` like:
+In order to get our `webdrivercss` command into the browser instance we created in our last lesson, we need to pass that instance into `webdrivercss.init()` like:
 
 ```js
 webdrivercss.init(browser);
@@ -77,7 +74,7 @@ The function takes 3 different parameters:
 
 ### Putting it all together
 
-Now that we've explained the parts of this function, let's see it in action:
+Now that we've explained the parts of this function, let's see webdriverCSS in action:
 
 ```
 browser
@@ -103,36 +100,57 @@ The header doesn't change over different breakpoints, but the benefits section d
 
 ### Checking the Results
 
-TODO 
+To view the results of this test we first need to make sure that we have selenium running. If you haven't installed selenium yet make sure that you have the selenium-standalone node package installed and run:
 
-To see the results of our tests, we can check out the images in the `my-shots` folder (To change this, set the `screenshotRoot` folder option when running `webdrivercss.init`. In this folder you'll see....
+```sh
+./node_modules/.bin/selenium-standalone install
+```
+### Start Selenium
+
+Once selenium is installed we can start it up by running this command in your terminal:
+
+```sh
+./node_modules/.bin/selenium-standalone start
+```
+### Run Our Tests
+
+> If you need to catch up, or check your work, take a look at `day-3.js` in the code-samples folder.
+
+With selenium started we can run our tests!
+
+```sh
+node tests.js
+```
+
+To see the results of our tests, take a look in the `webdrivercss` folder. In this folder you'll see the following files:
+
+```
+homepage.320px.png
+homepage.640px.png
+homepage.1024px.png
+homepage.png
+homepage.benefits.320px.baseline.png
+homepage.benefits.640px.baseline.png
+homepage.benefits.1024px.baseline.png
+homepage.header.baseline.png
+```
+
+The first four images listed (without baseline in the name) are the full page screenshots WebdriverCSS captures from Firefox. Once those images are captured WebdriverCSS crops the image down to your specified areas giving you the four baseline images. It's the baseline images we are concerned with, and those that we will be keeping.
 
 ## Storing Baseline Images
 
-Images are stored in the Git repo like any other file. This makes is simple to share baseline images across the teams. It also allows for changes in the baseline to be tracked over time.
+These baseline images get stored in the Git repo like any other file. This makes it simple to share baseline images across teams. It also allows for changes in the baseline to be tracked over time and viewed in pull requests.
 
 Be aware that if team members or testing platforms are not using the same OS, the baseline images might differ slightly. A common example is that a baseline will work for local testing on OSX, but the same baseline image fails when TravisCI runs the same visual regression test since it is Linux-based.
 
-### Accepting/Rejecting changes
+## Updating baseline images
 
-Whether or not updates to the baseline images are accepted depends on the goal of the changes. Here are a few scenarios:
+Eventually our design is going to change, and when it does, we need to make sure that our new baseline images accompany our style changes. 
 
-#### No visual changes
+If we increase the font size of our main header, our commit should include not just the new css, but the new baseline file as well. The reason for this is so that the next person that downloads our new CSS will also have a baseline image of our header with that larger text.
 
-If no visual changes occur (and none were expected), then nothing needs to be checked in.
+## Up next
 
-#### Unwanted visual changes
-
-If visual changes occurred (new images in the `diff` directory), but they weren't intended, that means there was a regression in the UI output. Review the diffs and fix the visual changes that occurred. No files should be checked in.
-
-#### Wanted visual changes
-
-If visual changes occur and are expected, the following steps will need to be taken to update the baseline images:
-
-1. Delete the contents of the baseline & diff image directories.
-2. Run the test suite again.
-3. Add/commit all updated images.
-4. Have another team member review the new images. [Github has useful image diff tools](https://github.com/blog/817-behold-image-view-modes) to help compare the changes.
-
+WebdriverCSS allows us to do much more than just snapping pictures. In our next lesson we'll start looking at the advanced features of WebdriverIO to see how we can test interactive elements like a mobile navigation, or login forms.
 
 *If you enjoyed these lessons, consider sharing this course with your friends*
