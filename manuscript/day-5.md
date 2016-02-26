@@ -51,20 +51,22 @@ How does this relate to our needs? We can throw an assert in our `getTitle` and 
 
 ```js
 browser
+    .init()
     .url("http://visualregressiontesting.com")
     .getTitle()
     .then(function(title){ 
-        assert.equal(title, "Visual Regression Testing");
+        assert.equal(title, "Visual Regression Testing - Home");
     })
     .isVisible(mainNav.selector)
     .then(function(isNavVisible){ 
         assert.ok(isNavVisible);
-    });
+    })
+    .end();
 ```
 
 `assert.ok` checks that the value passed in is truthy, which is what we want `isNavVisible` to be.
 
-So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed or failed.
+So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will throw an error and fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed.
 
 As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like Jenkins to mark a build as failed (if you're interested in more on the CICD process, the in-depth visual regression testing course covers it all).
 
@@ -76,39 +78,57 @@ The `webdrivercss` command has a special configuration which allows you to run a
 
 
 ```js
+var loginForm = {
+  name: "Login",
+  selector: "form.login"
+};
 browser
     ... more tests here ...
-    .webdrivercss("Login Default", loginForm, function (err, shot) {
+    .webdrivercss("Login Default", loginForm, function (err, shots) {
         assert.ifError(err);
-        assert.ok(shot.isWithinMisMatchTolerance);
+        assert.ok(shots.Login[0].isWithinMisMatchTolerance);
     });
 ```
 
 We assert two things:
 
 1. That `err` isn't an error (if it is something went wrong)
-2. The `shot.isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
+2. The `shots.Login[0].isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
 
-That's fairly simple, but if it looks complex to you, I've got bad news. Because of the way WebdriverCSS passes in the `shot` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get complicated. 
+That's fairly simple, but if it looks complex to you, I've got bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get complicated. 
 
-It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it. This next code snippet is going to get a little code heavy. Take a deep breath and let's plunge in:
+It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss/pull/140) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in:
 
 ```js
+var loginForm = {
+  name: "Login",
+  selector: "form.login"
+};
 browser
     ... more tests here ...
-    .webdrivercss("Login Default", loginForm, function (err, shot) {
+    .webdrivercss("Login Default", loginForm, function (err, shots) {
         assert.ifError(err);
-        // TODO much more complex code assertion goes here
+
+        Object.keys(shots).forEach(function(element) {
+            shots[element].forEach(function(shot) {
+              assert.ok(shot.isWithinMisMatchTolerance, shot.message);
+            })
+        });
     });
 ```
 
 While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same snippet of code throughout our tests, we can make it a standalone function and call it when needed:
 
 ```js
-function assertShots (err, shot) {
-    assert.ifError(err);
-    // TODO much more complex code assertion goes here
-}
+function assertShots (err, shots) {
+  assert.ifError(err);
+
+  Object.keys(shots).forEach(function(element) {
+    shots[element].forEach(function(shot) {
+      assert.ok(shot.isWithinMisMatchTolerance, shot.message);
+    })
+  });
+};
 
 browser
     ... more tests here ...
@@ -129,11 +149,15 @@ If you'd like the function as an easy copy/paste solution, have a look at [the s
 assert.equal(theEnd, true);
 ```
 
-Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it over. Assertions are a very powerful tool to bring in to your testing arsenal. If you're interested in learning more, check out these assertion libraries:
+Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it over. Assertions are a very powerful tool to bring in to your testing arsenal.
+
+While Node's `assert` library is useful for getting started, it's missing a lot of great features. Check out these tools to really take advantage of the idea:
 
 - [Chai Assertion Library](http://chaijs.com/)
 - [Chai Webdriver](http://chaijs.com/plugins/chai-webdriver)
 - [Should.js](https://github.com/shouldjs/should.js)
+- [Mocha Test Runner](http://mochajs.org/)
+- [Jasmine Test Runner](http://jasmine.github.io/)
 - [WebdriverCSS example with Mocha assertions](https://github.com/webdriverio/webdrivercss/blob/master/examples/webdrivercss.browserstack.with.mocha.js) written by [The Great Chris Ruppel](https://twitter.com/rupl)
 
 Tomorrow we'll wrap up the week with a "what's next" outlook. Until then, give yourself a pat on the back for completing the meat and potatoes of this course!
@@ -143,6 +167,5 @@ Okay, one last bit of fun:
 ```js
 assert.equal(youAreAwesome, true);
 ```
-
 
 *If you enjoyed these lessons, consider sharing this course with your friends*

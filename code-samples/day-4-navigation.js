@@ -18,6 +18,7 @@ var mainNav = {
 };
 
 browser
+  .init()
   .url("http://mysite.com")
   .webdrivercss("Main Nav Default", mainNav)
   .click(".main-nav")
@@ -27,4 +28,5 @@ browser
   .getUrl()
   .then(function(url) {
     console.log(url);
-  });
+  })
+  .end();

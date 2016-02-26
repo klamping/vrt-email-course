@@ -18,6 +18,7 @@ var loginForm = {
 };
 
 browser
+  .init()
   .url("http://mysite.com/login")
   .webdrivercss("Login Default", loginForm)
   .setValue(".login .username", "admin")
@@ -31,4 +32,5 @@ browser
     // Should print "Is error message visible? True"
   })
   .setValue(".login .password", "hunter2")
-  .webdrivercss("Login Username Password", loginForm);
+  .webdrivercss("Login Username Password", loginForm)
+  .end();
