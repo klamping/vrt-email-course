@@ -1,8 +1,8 @@
 # vrt-email-course
 
-- [Day 1](./day-1.md)
-- [Day 2](./day-2.md)
-- [Day 3](./day-3.md)
-- [Day 4](./day-4.md)
-- [Day 5](./day-5.md)
-- [Day 6](./day-6.md)
+- [Day 1](./manuscript/day-1.md)
+- [Day 2](./manuscript/day-2.md)
+- [Day 3](./manuscript/day-3.md)
+- [Day 4](./manuscript/day-4.md)
+- [Day 5](./manuscript/day-5.md)
+- [Day 6](./manuscript/day-6.md)
