@@ -57,6 +57,10 @@ This will be a constantly-running service, so you'll need to open a new command 
 
 * If you're interested in why we reference `./node_modules/bin/` and a way around that, read up [npm scripts](http://firstdoit.com/npm-scripts/).
 
+## Disclaimer
+
+In the code examples for the rest of the course, for brevity's sake we'll sometimes leave out repetitive bits of the code. To see the full examples, [check out the full code samples for each day](http://learn.visualregressiontesting.com/code-samples.zip).
+
 ## Let's write some tests
 
 Now that we have a local Selenium server running, we can use it to run some tests. In the same folder you used to install the dependencies, create a new file called `tests.js`. Open it up in your favorite code editor.

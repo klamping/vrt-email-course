@@ -25,8 +25,17 @@ We've already covered steps 1 and 2, so let's get started with the rest.
 Just like our previous actions, we're going to use a WebdriverIO command to click the element we want. And just like with WebdriverCSS, we'll pass in a CSS selector to specify the element we want to click:
 
 ```js
+var menuIcon = {
+    name: "Menu Icon",
+    selector: ".menu "
+};
+
 browser
-    .click(".main-nav")
+    .init()
+    .url("http://outdatedbrowser.com/en")
+    .webdrivercss("Main Menu Menu Icon", menuIcon)
+    .click(menuIcon.selector)
+    .end();
 ```
 
 This works almost exactly the same as a left click with your mouse button. That's the beauty of Selenium. It's as if you took the action yourself!
@@ -34,15 +43,18 @@ This works almost exactly the same as a left click with your mouse button. That'
 Now that we've clicked the nav, it should be open. Let's add another WebdriverCSS test for this state:
 
 ```js
-var mainNav = {
-    name: "Main Nav",
-    selector: ".main-nav"
+var menu = {
+    name: "Menu",
+    selector: ".main-menu "
 };
 
 browser
-    .webdrivercss("Main Nav Default", mainNav)
-    .click(mainNav.selector)
-    .webdrivercss("Main Nav Open", mainNav)
+    .init()
+    .url("http://outdatedbrowser.com/en")
+    .webdrivercss("Main Menu Menu Icon", menuIcon)
+    .click(menuIcon.selector)
+    .webdrivercss("Main Menu Open", menu)
+    .end();
 ```
 
 Look at that! You now have a visual regression test for two states of your navigation. You could easily take this further if you have more than one level in your navigation hierarchy (hello, mega dropdowns!)
@@ -50,28 +62,30 @@ Look at that! You now have a visual regression test for two states of your navig
 For our needs, we want to see what the page looks like after clicking a menu item. WebdriverIO automatically waits for the page to load after the click, so it's a pretty simple addition to our test:
 
 ```js
-var mainNav = {
-    name: "Main Nav",
-    selector: ".main-nav"
-};
-var aboutSelector = mainNav.selector + " .about";
+var projectSelector = mainNav.selector + " a[href$=project]";
 
 browser
-    .webdrivercss("Main Nav Default", mainNav)
-    .click(mainNav.selector)
-    .webdrivercss("Main Nav Open", mainNav)
-    .click(aboutSelector)
-    // WebdriverIO will wait here until the "About" page loads
-    .webdrivercss("Main Nav - About Page", mainNav)
+    .init()
+    .url("http://outdatedbrowser.com/en")
+    .webdrivercss("Main Menu Menu Icon", menuIcon)
+    .click(menuIcon.selector)
+    .webdrivercss("Main Menu Open", menu)
+    .click(projectSelector)
+    // WebdriverIO will wait here until the "Project" page loads
+    .click(menuIcon.selector)
+    .webdrivercss("Main Menu - Projects Page", menu)
     .getUrl()
     .then(function(url) {
         console.log(url);
-        // outputs something like:
-        // "http://mysite.com/about"
-    });
+        // outputs:
+        // http://outdatedbrowser.com/en/project
+    })
+    .end();
 ```
 
 We threw in the `getUrl` command just to validate that we're on the right page. We also could have checked the page title using `getTitle` to verify that way.
+
+You may also notice that we used an attribute selector to find the "Projects" link. Not only does WebdriverIO have strong support for CSS selectors, but it also supports xPath and "Link text" selectors. Check out [their selectors page](http://webdriver.io/guide/usage/selectors.html) for more information.
 
 ## More Actions
 
@@ -83,31 +97,40 @@ Say you want to test the login form on your site. You can grab a screenshot of t
 
 ```js
 var loginForm = {
-    name: "Login",
-    selector: "form.login"
+    name: "Login Form",
+    selector: ".login-form"
 };
 
 browser
+    .init()
+    .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
+    .end();
 ```
 
 Then, you can set the text of the username using [the `setValue` command](http://webdriver.io/api/action/setValue.html):
 
 ```js
-var usernameSelector = loginForm.selector + " .username";
+var usernameSelector = loginForm.selector + " #login-email-field";
 
 browser
+    .init()
+    .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
     .setValue(usernameSelector, "admin")
+    .end();
 ```
 
 Why not take a screenshot of this state?
 
 ```js
 browser
+    .init()
+    .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
     .setValue(usernameSelector, "admin")
     .webdrivercss("Login w/Username", loginForm)
+    .end();
 ```
 
 It's important to note here that `setValue` only works with "interactable" elements
@@ -115,14 +138,17 @@ It's important to note here that `setValue` only works with "interactable" eleme
 Let's repeat that with the password:
 
 ```js
-var passwordSelector = loginForm.selector + " .password";
+var passwordSelector = loginForm.selector + " #login-password-field_";
 
 browser
+    .init()
+    .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
     .setValue(usernameSelector, "admin")
     .webdrivercss("Login Username", loginForm)
     .setValue(passwordSelector, "hunter2")
     .webdrivercss("Login Username Password", loginForm)
+    .end();
 ```
 
 ### Submitting Forms
@@ -132,7 +158,7 @@ You could submit the form by running `.click` on the submit button, or you can u
 ```js
 var loginForm = {
     name: "Login",
-    selector: "form.login"
+    selector: ".login-form"
 };
 
 browser
@@ -145,9 +171,11 @@ browser
 Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdrivercss calls removed for brevity):
 
 ```js
-var errorSelector = ".alert.error";
+var errorSelector = ".error-message";
 
 browser
+    .init()
+    .url("https://codepen.io/login")
     .setValue(usernameSelector, "admin")
     .setValue(passwordSelector, "badpassword")
     .submitForm(loginForm.selector)
@@ -156,6 +184,7 @@ browser
         console.log("Is error message visible?", isErrorVisible);
         // Should print "Is error message visible? True"
     })
+    .end();
 ```
 
 This works much the same way the `getTitle` command shown in Day 2 works. The value of `isVisible` is passed to the `then` command, which we can use to display our result.

@@ -9,24 +9,33 @@ var options = {
 var browser = wdio.remote(options);
 
 require("webdrivercss").init(browser, {
-  screenWidth: [320,480,640,1024]
+  screenWidth: [320,640,1024]
 });
 
-var mainNav = {
-  name: "Main Nav",
-  selector: ".main-nav"
+var menuIcon = {
+  name: "Menu Icon",
+  selector: ".menu "
 };
+var menu = {
+  name: "Menu",
+  selector: ".main-menu "
+};
+var projectSelector = mainNav.selector + " a[href$=project]";
 
 browser
   .init()
-  .url("http://mysite.com")
-  .webdrivercss("Main Nav Default", mainNav)
-  .click(".main-nav")
-  .webdrivercss("Main Nav Open", mainNav)
-  .click(".main-nav .about")
-  .webdrivercss("Main Nav - About Page", mainNav)
+  .url("http://outdatedbrowser.com/en")
+  .webdrivercss("Main Menu Menu Icon", menuIcon)
+  .click(menuIcon.selector)
+  .webdrivercss("Main Menu Open", menu)
+  .click(projectSelector)
+  // WebdriverIO will wait here until the "About" page loads
+  .click(menuIcon.selector)
+  .webdrivercss("Main Menu - Projects Page", menu)
   .getUrl()
   .then(function(url) {
-    console.log(url);
+      console.log(url);
+      // outputs:
+      // http://outdatedbrowser.com/en/project
   })
   .end();
