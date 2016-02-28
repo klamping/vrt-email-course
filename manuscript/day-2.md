@@ -67,13 +67,13 @@ Now that we have a local Selenium server running, we can use it to run some test
 
 The first thing we're going to do is load WebdriverIO. We do this by using a standard Node.js `require` statement:
 
-```
+```js
 var wdio = require("webdriverio");
 ```
 
 Now that we have our `wdio` object, our next step is to set up our browser instance.
 
-```
+```js
 var options = {
 	desiredCapabilities: {
 		browserName: "firefox"
@@ -86,7 +86,7 @@ What just happened here? Well, we defined the characteristics of our browser (we
 
 We're not quite done with the set up phase. We have to kick everything off for good by calling `init`:
 
-```
+```js
 browser.init();
 ```
 
@@ -94,7 +94,7 @@ That will open our browser and make it ready for action.
 
 Here's everything we have so far:
 
-```
+```js
 var wdio = require("webdriverio");
 var options = {
 	desiredCapabilities: {
@@ -110,7 +110,7 @@ browser.init();
 
 Now that we have a browser to play around with, let's do some damage. Load the page you want to test with the `url` browser command.
 
-```
+```js
 browser
 	.init()
 	.url("http://learn.visualregressiontesting.com");
@@ -128,7 +128,7 @@ We're getting close to running our test to try it out. Just one more thing and I
 
 We've got the page loaded, but let's validate that it's actually the right place. We can do that by checking the title of the page and logging it through `console.log`. Let's take a look at the syntax:
 
-```
+```js
 browser
 	.init()
 	.url("http://learn.visualregressiontesting.com")
@@ -143,7 +143,7 @@ Here we asked our browser to get the title of the page (the aptly named `getTitl
 
 Okay, we need to see all this in action to really grasp what's going on. Just to recap, here's what your `tests.js` file should look like:
 
-```
+```js
 var wdio = require("webdriverio");
 var options = {
 	desiredCapabilities: {
@@ -162,13 +162,13 @@ browser
 
 Hopefully yours matches that. If so, it's time to run the test! You can do so by asking node (via the command line) to ever so kindly execute your code:
 
-```
+```sh
 node tests.js
 ```
 
 If all went well, you should have seen the following logged out:
 
-```
+```sh
 Title is: welcome
 ```
 
@@ -178,7 +178,7 @@ Okay, I have a confession to make. I may have left the browser just sitting ther
 
 I forgot to tell you to lets WebdriverIO know that the tests are over and it can shut things down. That's okay though, it's really simple to do that. Just use the `end` command. Here's what the basic structure of your tests will look like:
 
-```
+```js
 browser
 	.init()
 	// all your test commands go in between init and end
@@ -187,7 +187,7 @@ browser
 
 Tack `.end()` as the final command of your script, so it looks like:
 
-```
+```js
 browser
 	.init()
 	.url("http://learn.visualregressiontesting.com")

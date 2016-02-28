@@ -51,7 +51,7 @@ Lets first look at the anatomy of the WebdriverCSS command.
 
 Just like the `.url()` and the `.getTitle()` function we used yesterday, `.webdrivercss()` is a chainable, promise based function that is typically placed directly after the `.url()` call.
 
-```
+```js
 browser
   .init()
   .url("https://learn.visualregressiontesting.com")
@@ -76,7 +76,7 @@ The function takes 3 different parameters:
 
 Now that we've explained the parts of this function, let's see webdriverCSS in action:
 
-```
+```js
 browser
   .init()
   .url("https://learn.visualregressiontesting.com")
