@@ -1,0 +1,17 @@
+{
+  "name": "@visualregressiontesting/code-samples",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "selenium-standalone": "^5.0.0",
+    "webdrivercss": "^2.0.0-beta-rc1",
+    "webdriverio": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
