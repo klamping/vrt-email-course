@@ -191,7 +191,7 @@ This works much the same way the `getTitle` command shown in Day 2 works. The va
 
 ## The Full Tests
 
-That sure was a lot, huh? Be sure to check out the Day 4 code samples to see the entirety of the navigation and login tests. 
+That sure was a lot, huh? Be sure to check out [the code samples](http://learn.visualregressiontesting.com/code-samples.zip) for Day 4 to see the entirety of the navigation and login tests. 
 
 ## Finishing up
 
