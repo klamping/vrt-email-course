@@ -91,5 +91,3 @@ There are a few requirements you'll need to have going before getting started:
 ## What's Next?
 
 Phew, you've made it through the entire first day without any code being shown. Don't worry, we've saved all that for tomorrow, where we'll take a look at writing your very first automated test (we're so excited for you!)
-
-*If you enjoyed these lessons, consider [sharing this course with your friends](https://twitter.com/intent/tweet?text=Catch%20critical%20visual%20regressions.%20Check%20out%20this%20free%20guide:%20http://learn.visualregressiontesting.com)*

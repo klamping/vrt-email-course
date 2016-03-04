@@ -19,6 +19,4 @@ Without further ado, here's your Top 10 list of "Ways to Test Better":
 
 ## That's It
 
-Again, thanks for reading through these emails and kudos on finishing the course. Stayed tuned for more details on the upcoming in-depth Visual Regression Testing online course and be sure to check out the main website at [visualregressiontesting.com](http://visualregressiontesting.com)
-
-*If you enjoyed these lessons, consider sharing this course with your friends*
+Again, thanks for reading through these emails and kudos on finishing the course. Stayed tuned for more details on the upcoming in-depth Visual Regression Testing online course and be sure to check out the main website at [visualregressiontesting.com](http://visualregressiontesting.com).

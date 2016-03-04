@@ -178,5 +178,3 @@ Okay, one last bit of fun:
 ```js
 assert.equal(youAreAwesome, true);
 ```
-
-*If you enjoyed these lessons, consider sharing this course with your friends*

@@ -152,5 +152,3 @@ If we increase the font size of our main header, our commit should include not j
 ## Up next
 
 WebdriverCSS allows us to do much more than just snapping pictures. In our next lesson we'll start looking at the advanced features of WebdriverIO to see how we can test interactive elements like a mobile navigation, or login forms.
-
-*If you enjoyed these lessons, consider sharing this course with your friends*

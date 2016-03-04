@@ -206,5 +206,3 @@ So, how does it feel to have programmatically taken control of a  browser? A lit
 We promise that over the next couple of days we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and a very real visual tests.
 
 If you can't wait until then, take a look at [the WebdriverIO API page](http://webdriver.io/api.html) to see a full list of commands available for use.
-
-*If you enjoyed these lessons, consider [sharing this course with your friends](https://twitter.com/intent/tweet?text=Catch%20critical%20visual%20regressions.%20Check%20out%20this%20free%20guide:%20http://learn.visualregressiontesting.com)*
