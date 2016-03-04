@@ -27,14 +27,14 @@ Just like our previous actions, we're going to use a WebdriverIO command to clic
 ```js
 var menuIcon = {
     name: "Menu Icon",
-    selector: ".menu "
+    elem: ".menu "
 };
 
 browser
     .init()
     .url("http://outdatedbrowser.com/en")
     .webdrivercss("Main Menu Menu Icon", menuIcon)
-    .click(menuIcon.selector)
+    .click(menuIcon.elem)
     .end();
 ```
 
@@ -45,14 +45,14 @@ Now that we've clicked the nav, it should be open. Let's add another WebdriverCS
 ```js
 var menu = {
     name: "Menu",
-    selector: ".main-menu "
+    elem: ".main-menu "
 };
 
 browser
     .init()
     .url("http://outdatedbrowser.com/en")
     .webdrivercss("Main Menu Menu Icon", menuIcon)
-    .click(menuIcon.selector)
+    .click(menuIcon.elem)
     .webdrivercss("Main Menu Open", menu)
     .end();
 ```
@@ -62,17 +62,17 @@ Look at that! You now have a visual regression test for two states of your navig
 For our needs, we want to see what the page looks like after clicking a menu item. WebdriverIO automatically waits for the page to load after the click, so it's a pretty simple addition to our test:
 
 ```js
-var projectSelector = mainNav.selector + " a[href$=project]";
+var projectLink = mainNav.elem + " a[href$=project]";
 
 browser
     .init()
     .url("http://outdatedbrowser.com/en")
     .webdrivercss("Main Menu Menu Icon", menuIcon)
-    .click(menuIcon.selector)
+    .click(menuIcon.elem)
     .webdrivercss("Main Menu Open", menu)
-    .click(projectSelector)
+    .click(projectLink)
     // WebdriverIO will wait here until the "Project" page loads
-    .click(menuIcon.selector)
+    .click(menuIcon.elem)
     .webdrivercss("Main Menu - Projects Page", menu)
     .getUrl()
     .then(function(url) {
@@ -98,7 +98,7 @@ Say you want to test the login form on your site. You can grab a screenshot of t
 ```js
 var loginForm = {
     name: "Login Form",
-    selector: ".login-form"
+    elem: ".login-form"
 };
 
 browser
@@ -111,13 +111,13 @@ browser
 Then, you can set the text of the username using [the `setValue` command](http://webdriver.io/api/action/setValue.html):
 
 ```js
-var usernameSelector = loginForm.selector + " #login-email-field";
+var username = loginForm.elem + " #login-email-field";
 
 browser
     .init()
     .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
-    .setValue(usernameSelector, "admin")
+    .setValue(username, "admin")
     .end();
 ```
 
@@ -128,7 +128,7 @@ browser
     .init()
     .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
-    .setValue(usernameSelector, "admin")
+    .setValue(username, "admin")
     .webdrivercss("Login w/Username", loginForm)
     .end();
 ```
@@ -138,15 +138,15 @@ It's important to note here that `setValue` only works with "interactable" eleme
 Let's repeat that with the password:
 
 ```js
-var passwordSelector = loginForm.selector + " #login-password-field_";
+var password = loginForm.elem + " #login-password-field_";
 
 browser
     .init()
     .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
-    .setValue(usernameSelector, "admin")
+    .setValue(username, "admin")
     .webdrivercss("Login Username", loginForm)
-    .setValue(passwordSelector, "hunter2")
+    .setValue(password, "hunter2")
     .webdrivercss("Login Username Password", loginForm)
     .end();
 ```
@@ -158,12 +158,12 @@ You could submit the form by running `.click` on the submit button, or you can u
 ```js
 var loginForm = {
     name: "Login",
-    selector: ".login-form"
+    elem: ".login-form"
 };
 
 browser
     ... test code here ...
-    .submitForm(loginForm.selector)
+    .submitForm(loginForm.elem)
 ```
 
 ### Looking for Elements
@@ -171,15 +171,15 @@ browser
 Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdrivercss calls removed for brevity):
 
 ```js
-var errorSelector = ".error-message";
+var error = ".error-message";
 
 browser
     .init()
     .url("https://codepen.io/login")
-    .setValue(usernameSelector, "admin")
-    .setValue(passwordSelector, "badpassword")
-    .submitForm(loginForm.selector)
-    .isVisible(errorSelector)
+    .setValue(username, "admin")
+    .setValue(password, "badpassword")
+    .submitForm(loginForm.elem)
+    .isVisible(error)
     .then(function(isErrorVisible) {
         console.log("Is error message visible?", isErrorVisible);
         // Should print "Is error message visible? True"

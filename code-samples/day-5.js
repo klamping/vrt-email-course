@@ -1,5 +1,5 @@
-var assert = require("assert");
 var wdio = require("webdriverio");
+var assert = require("assert");
 
 var options = {
   desiredCapabilities: {
@@ -10,7 +10,7 @@ var options = {
 var browser = wdio.remote(options);
 
 require("webdrivercss").init(browser, {
-  screenWidth: [320,480,640,1024]
+  screenWidth: [320,640,1024]
 });
 
 function assertShots (err, shots) {
@@ -23,27 +23,26 @@ function assertShots (err, shots) {
   });
 };
 
-var loginForm = {
-  name: "Login",
-  selector: "form.login"
+var emailSignup = {
+  name: "Form",
+  elem: ".email-signup"
 };
 
-var mainNav = ".header .nav";
+var emailField = ".email"
 
 browser
   .init()
-  .url("http://visualregressiontesting.com")
+  .url("http://learn.visualregressiontesting.com")
   .getTitle()
   .then(function(title){
-    assert.equal(title, "Visual Regression Testing - Home");
+    assert.equal(title, "Learn Visual Regression Testing");
   })
-  .isVisible(mainNav)
-  .then(function(isNavVisible){
-    assert.ok(isNavVisible);
+  .isVisible(emailSignup.elem)
+  .then(function(isFormVisible){
+    assert.ok(isFormVisible);
   })
-  .webdrivercss("Login Default", loginForm, assertShots)
-  .setValue(".login .username", "admin")
-  .webdrivercss("Login Username", loginForm,  assertShots)
-  .setValue(".login .password", "hunter2")
-  .webdrivercss("Login Username Password", loginForm, assertShots)
+  .webdrivercss("Signup", emailSignup, assertShots)
+  .scroll(emailField)
+  .setValue(emailField, "learn@visualregressiontesting.com")
+  .webdrivercss("Signup with email", emailSignup, assertShots)
   .end();

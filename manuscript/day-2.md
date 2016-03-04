@@ -1,6 +1,6 @@
 # Writing Your First Test
 
-Day 2 is here; I hope you're ready to dig in. Let's get started with some installations!
+Day 2 is here; we hope you're ready to dig in. Let's get started with some installations!
 
 Assuming you have Node.js set up and a folder created to store all of our work, open up a command line in that folder.
 
@@ -24,7 +24,7 @@ This will install the needed tools to run your tests. They are:
 
 WebdriverIO works by taking our JavaScript test instructions and passing them along to Selenium, which will tell the browser what actions to take.
 
-WebdriverIO's docs say that it "makes it possible to write super easy Selenium tests" and I have to agree. Being able to construct tests in JavaScript is empowering; I don't have to learn Java to write automation!
+WebdriverIO's docs say that it "makes it possible to write super easy Selenium tests" and we have to agree. Being able to construct tests in JavaScript is empowering; we don't have to learn Java to write automation!
 
 ## WebdriverCSS
 
@@ -37,7 +37,7 @@ You can do a fair amount of configuration with the tool, but for now, those two 
 
 ### Selenium Standalone
 
-It was a mess the first time I tried setting up Selenium. I had to scour the official site and determine whether I needed the standalone server or the browser plugins or maybe even something called "the grid". I didn't get far.
+It was a mess the first time we tried setting up Selenium. We had to scour the official site and determine whether we needed the standalone server or the browser plugins or maybe even something called "the grid". We didn't get far.
 
 Luckily, this has been incredibly simplified for us with the Selenium-Standalone NPM module. On our command, it will spin up a selenium standalone server (which is the tool we want). This server will be used by WebdriverIO to run our tests.
 
@@ -55,7 +55,7 @@ After that is complete, start the server:
 
 This will be a constantly-running service, so you'll need to open a new command line window to continue work. You can stop the server by pressing `Ctrl-C`.
 
-* If you're interested in why we reference `./node_modules/bin/` and a way around that, read up [npm scripts](http://firstdoit.com/npm-scripts/).
+* If you're interested in why we reference `./node_modules/bin/` and a way around that, [read up on npm scripts](http://firstdoit.com/npm-scripts/).
 
 ## Disclaimer
 
@@ -118,13 +118,13 @@ browser
 
 A few things:
 
-1. I reorganized the code to have each command on a separate line. This helps with readability.
-2. I "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jQuery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those).
-3. I used the `url` command to do something in the browser. How awesome!
+1. We reorganized the code to have each command on a separate line. This helps with readability.
+2. We "chained" the `url` command to the `init` command. This is the same method of chaining you may have seen with [jQuery commands](http://tobiasahlin.com/blog/quick-guide-chaining-in-jquery/) (or [JavaScript promises](https://davidwalsh.name/promises), if you're familiar with those).
+3. We used the `url` command to do something in the browser. How awesome!
 
 ### Check the title
 
-We're getting close to running our test to try it out. Just one more thing and I'll let you know the secret command to make the magic happen.
+We're getting close to running our test to try it out. Just one more thing and we'll let you know the secret command to make the magic happen.
 
 We've got the page loaded, but let's validate that it's actually the right place. We can do that by checking the title of the page and logging it through `console.log`. Let's take a look at the syntax:
 
@@ -174,9 +174,9 @@ Title is: welcome
 
 ### Cleaning up
 
-Okay, I have a confession to make. I may have left the browser just sitting there after the tests finished, and now it's wondering what in the world is going on. You should go ahead and close that window and let the browser be at peace.
+Okay, we have a confession to make. We may have left the browser just sitting there after the tests finished, and now it's wondering what in the world is going on. You should go ahead and close that window and let the browser be at peace.
 
-I forgot to tell you to lets WebdriverIO know that the tests are over and it can shut things down. That's okay though, it's really simple to do that. Just use the `end` command. Here's what the basic structure of your tests will look like:
+We forgot to tell you to lets WebdriverIO know that the tests are over and it can shut things down. That's okay though, it's really simple to do that. Just use the `end` command. Here's what the basic structure of your tests will look like:
 
 ```js
 browser
@@ -203,8 +203,8 @@ Run the same Node command and your tests will run, but this time the browser wil
 
 So, how does it feel to have programmatically taken control of a  browser? A little awesome, right? Okay, if you're underwhelmed, that's because we didn't really test much. We only peaked at the page title then closed everything down before we got ourselves in trouble.
 
-I promise tomorrow that we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and a very simple visual test.
+We promise that over the next couple of days we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and a very real visual tests.
 
 If you can't wait until then, take a look at [the WebdriverIO API page](http://webdriver.io/api.html) to see a full list of commands available for use.
 
-*If you enjoyed these lessons, consider sharing this course with your friends*
+*If you enjoyed these lessons, consider [sharing this course with your friends](https://twitter.com/intent/tweet?text=Catch%20critical%20visual%20regressions.%20Check%20out%20this%20free%20guide:%20http://learn.visualregressiontesting.com)*

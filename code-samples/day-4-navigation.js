@@ -14,28 +14,28 @@ require("webdrivercss").init(browser, {
 
 var menuIcon = {
   name: "Menu Icon",
-  selector: ".menu "
+  elem: ".menu a"
 };
 var menu = {
   name: "Menu",
-  selector: ".main-menu "
+  elem: ".main_menu"
 };
-var projectSelector = mainNav.selector + " a[href$=project]";
+var projectLink = menu.elem + " a[href$=project]";
 
 browser
   .init()
   .url("http://outdatedbrowser.com/en")
   .webdrivercss("Main Menu Menu Icon", menuIcon)
-  .click(menuIcon.selector)
+  .click(menuIcon.elem)
   .webdrivercss("Main Menu Open", menu)
-  .click(projectSelector)
+  .click(projectLink)
   // WebdriverIO will wait here until the "About" page loads
-  .click(menuIcon.selector)
+  .click(menuIcon.elem)
   .webdrivercss("Main Menu - Projects Page", menu)
   .getUrl()
   .then(function(url) {
-      console.log(url);
-      // outputs:
-      // http://outdatedbrowser.com/en/project
+    console.log(url);
+    // outputs:
+    // http://outdatedbrowser.com/en/project
   })
   .end();

@@ -1,16 +1,16 @@
 # Testing Terminology
 
-Hi, and welcome to the first day of five in the "Visual Regression Testing" e-mail course.
+Hi, and welcome to the first day of six in the "Visual Regression Testing" e-mail course.
 
 Over the next week, we'll get you started understanding the essentials of writing automated functional tests using WebdriverIO.
 
 At the end of the week, you will have all the knowledge you need to write an elementary set of tests, and you may be surprised just how handy they are during your next site update.
 
-You may also be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in my book.
+You may also be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in our book.
 
 ## Some Terminology
 
-Let's kick off day one by expanding your vocabulary with a few new terms that we'll be repeating over and over throughout the course.
+Let's kick off day one by expanding your vocabulary with a few new terms that we'll be repeating over and over throughout the course:
 
 ### Regressions
 
@@ -64,7 +64,7 @@ And computers are much better at spotting pixel changes. It's all numbers to the
 
 ## Some Disclaimers
 
-I really believe in the benefits of automated testing, so I should probably throw out some disclaimers before I get you too excited:
+We really believe in the benefits of automated testing, so we should probably throw out some disclaimers before we get you too excited:
 
 - Functional testing can be finicky, because websites are complicated.
 - You can't test everything because, again, websites are complicated.
@@ -90,6 +90,6 @@ There are a few requirements you'll need to have going before getting started:
 
 ## What's Next?
 
-Phew, you've made it through the entire first day without any code being shown. Don't worry, I've saved all that for tomorrow, where we'll take a look at writing your very first automated test (I'm so excited for you!).
+Phew, you've made it through the entire first day without any code being shown. Don't worry, we've saved all that for tomorrow, where we'll take a look at writing your very first automated test (we're so excited for you!)
 
-*If you enjoyed these lessons, consider sharing this course with your friends*
+*If you enjoyed these lessons, consider [sharing this course with your friends](https://twitter.com/intent/tweet?text=Catch%20critical%20visual%20regressions.%20Check%20out%20this%20free%20guide:%20http://learn.visualregressiontesting.com)*

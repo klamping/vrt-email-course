@@ -2,7 +2,7 @@
 
 First off, congratulations on making it to the final day. Your reward is an email with no code in it. Exciting, huh?
 
-There are quite a few topics I'd like to briefly touch upon to get your gears turning on what to do next. We'll stray away from the specific technical implementations to talk general ideas.
+There are quite a few topics we'd like to briefly touch upon to get your gears turning on what to do next. We'll stray away from the specific technical implementations to talk general ideas.
 
 Without further ado, here's your Top 10 list of "Ways to Test Better":
 
@@ -14,7 +14,7 @@ Without further ado, here's your Top 10 list of "Ways to Test Better":
 6. Sometimes you just need to see how someone else did it. The WebdriverIO code repo contains [several examples to browse through](https://github.com/webdriverio/webdriverio/tree/master/examples).
 7. Get your tests organized by using a test framework like [Mocha](http://mochajs.org/) or [Jasmine](https://github.com/jasmine/jasmine). These frameworks make working with large test suites a breeze, and offer a deep set of features.
 8. Once you start building out several test files, you'll end up with that same WebdriverIO configuration scattered across all of them. Switch over to using [the WebdriverIO Test Runner](http://webdriver.io/guide/testrunner/gettingstarted.html) to simplify your test setup.
-9. Get your team on board with functional testing by bribing them with cookies and donuts. Okay, that's not really a tip, but now I'm hungry.
+9. Get your team on board with functional testing by bribing them with cookies and donuts. Okay, that's not really a tip, but now we're hungry.
 10. Need more help? The [WebdriverIO](https://gitter.im/webdriverio/webdriverio) and [WebdriverCSS](https://gitter.im/webdriverio/webdrivercss) chat rooms are open at all hours for questions and help with the journey. Reach out to @micahgodbolt and @klamping to let us know you've joined the fun.
 
 ## That's It

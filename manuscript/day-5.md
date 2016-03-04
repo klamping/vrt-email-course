@@ -50,21 +50,28 @@ And this would pass, as 1 does not equal 2 (at least not in this universe).
 How does this relate to our needs? We can throw an assert in our `getTitle` and `isVisible` checks:
 
 ```js
+var assert = require("assert");
+
+var emailSignup = {
+    name: "Form",
+    elem: ".email-signup"
+};
+
 browser
     .init()
-    .url("http://visualregressiontesting.com")
+    .url("http://learn.visualregressiontesting.com")
     .getTitle()
     .then(function(title){ 
-        assert.equal(title, "Visual Regression Testing - Home");
+        assert.equal(title, "Learn Visual Regression Testing");
     })
-    .isVisible(mainNav.selector)
-    .then(function(isNavVisible){ 
-        assert.ok(isNavVisible);
+    .isVisible(emailSignup.elem)
+    .then(function(isFormVisible){ 
+        assert.ok(isFormVisible);
     })
     .end();
 ```
 
-`assert.ok` checks that the value passed in is truthy, which is what we want `isNavVisible` to be.
+`assert.ok` checks that the value passed in is truthy, which is what we want `isFormVisible` to be.
 
 So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will throw an error and fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed.
 
@@ -74,39 +81,39 @@ As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/
 
 We mentioned having to check for screenshot diffs at the beginning of today's lesson. Does that imply that we can "assert" our way out of it? Why yes, yes it does!
 
-The `webdrivercss` command has a special configuration which allows you to run a function after the screenshot and comparison are done. It will pass the results of the capture to that function, and we can use those results in our assertions.
+The `webdrivercss` command has a special option which allows you to run a function after the screenshot and comparison are done. It will pass the results of the test to that function, and we can use those results in our assertions.
 
 
 ```js
-var loginForm = {
-  name: "Login",
-  selector: "form.login"
-};
 browser
-    ... more tests here ...
-    .webdrivercss("Login Default", loginForm, function (err, shots) {
+    .init()
+    .url("http://learn.visualregressiontesting.com")
+    .webdrivercss("Signup", emailSignup, function (err, shots) {
         assert.ifError(err);
-        assert.ok(shots.Login[0].isWithinMisMatchTolerance);
-    });
+        assert.ok(shots.Form[0].isWithinMisMatchTolerance);
+    })
+    .end();
 ```
 
 We assert two things:
 
 1. That `err` isn't an error (if it is something went wrong)
-2. The `shots.Login[0].isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
+2. The `shots.Form[0].isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
 
-That's fairly simple, but if it looks complex to you, I've got bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get complicated. 
+That's fairly simple, but if it looks complex to you, we have bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get even more complicated. 
 
-It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss/pull/140) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in:
+It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss/pull/140) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in (don't worry, you don't have to memorize all of this):
 
 ```js
-var loginForm = {
-  name: "Login",
-  selector: "form.login"
+var emailSignup = {
+    name: "Form",
+    elem: ".email-signup"
 };
+
 browser
-    ... more tests here ...
-    .webdrivercss("Login Default", loginForm, function (err, shots) {
+    .init()
+    .url("http://learn.visualregressiontesting.com")
+    .webdrivercss("Signup", emailSignup, function (err, shots) {
         assert.ifError(err);
 
         Object.keys(shots).forEach(function(element) {
@@ -114,7 +121,8 @@ browser
               assert.ok(shot.isWithinMisMatchTolerance, shot.message);
             })
         });
-    });
+    })
+    .end();
 ```
 
 While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same snippet of code throughout our tests, we can make it a standalone function and call it when needed:
@@ -130,16 +138,19 @@ function assertShots (err, shots) {
   });
 };
 
+var emailField = ".email"
+
 browser
-    ... more tests here ...
-    .webdrivercss("Login Default", loginForm, assertShots)
-    .setValue(usernameSelector, "admin")
-    .webdrivercss("Login Username", loginForm, assertShots)
-    .setValue(passwordSelector, "hunter2")
-    .webdrivercss("Login Username Password", loginForm, assertShots);
+    .init()
+    .url("http://learn.visualregressiontesting.com")
+    .webdrivercss("Signup", emailSignup, assertShots)
+    .scroll(emailField)
+    .setValue(emailField, "learn@visualregressiontesting.com")
+    .webdrivercss("Signup with email", emailSignup, assertShots)
+    .end();
 ```
 
-In each of our WebdriverCSS calls we pass in our assertion function, which handles programmatically checking that everything turned out as planned.
+In each of our WebdriverCSS calls we pass in our assertion function, which programmatically handles checking that everything turned out as planned.
 
 If you'd like the function as an easy copy/paste solution, have a look at [the special gist created just for you](https://gist.github.com/klamping/cd32298696ee92b50819).
 
@@ -151,14 +162,14 @@ assert.equal(theEnd, true);
 
 Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it over. Assertions are a very powerful tool to bring in to your testing arsenal.
 
-While Node's `assert` library is useful for getting started, it's missing a lot of great features. Check out these tools to really take advantage of the idea:
+While Node's `assert` library is useful for getting started, it's missing a lot of great features. Check out these tools to really take advantage of the "assertion" concept:
 
 - [Chai Assertion Library](http://chaijs.com/)
 - [Chai Webdriver](http://chaijs.com/plugins/chai-webdriver)
 - [Should.js](https://github.com/shouldjs/should.js)
 - [Mocha Test Runner](http://mochajs.org/)
-- [Jasmine Test Runner](http://jasmine.github.io/)
 - [WebdriverCSS example with Mocha assertions](https://github.com/webdriverio/webdrivercss/blob/master/examples/webdrivercss.browserstack.with.mocha.js) written by [The Great Chris Ruppel](https://twitter.com/rupl)
+- [Jasmine Test Runner](http://jasmine.github.io/)
 
 Tomorrow we'll wrap up the week with a "what's next" outlook. Until then, give yourself a pat on the back for completing the meat and potatoes of this course!
 

@@ -1,7 +1,6 @@
 {
   "name": "@visualregressiontesting/code-samples",
   "version": "1.0.0",
-  "description": "",
   "dependencies": {
     "selenium-standalone": "^5.0.0",
     "webdrivercss": "^2.0.0-beta-rc1",
@@ -13,5 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "main": "day-2.js",
+  "description": ""
 }

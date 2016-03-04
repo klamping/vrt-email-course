@@ -14,22 +14,22 @@ require("webdrivercss").init(browser, {
 
 var loginForm = {
     name: "Login",
-    selector: ".login-form"
+    elem: ".login-form"
 };
-var usernameSelector = loginForm.selector + " #login-email-field";
-var passwordSelector = loginForm.selector + " #login-password-field_";
-var errorSelector = ".error-message";
+var username = loginForm.elem + " #login-email-field";
+var password = loginForm.elem + " #login-password-field_";
+var error = ".error-message";
 
 browser
   .init()
   .url("https://codepen.io/login")
   .webdrivercss("Login Default", loginForm)
-  .setValue(usernameSelector, "admin")
+  .setValue(username, "admin")
   .webdrivercss("Login Username", loginForm)
-  .setValue(passwordSelector, "badpassword")
-  .submitForm(loginForm.selector)
+  .setValue(password, "badpassword")
+  .submitForm(loginForm.elem)
   .webdrivercss("Login Error Message", loginForm)
-  .isVisible(errorSelector)
+  .isVisible(error)
   .then(function(isErrorVisible) {
     console.log("Is error message visible?", isErrorVisible);
     // Should print "Is error message visible? True"
