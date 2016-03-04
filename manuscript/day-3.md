@@ -114,7 +114,7 @@ Once selenium is installed we can start it up by running this command in your te
 ```
 ### Run Our Tests
 
-> If you need to catch up, or check your work, take a look at `day-3.js` in the code-samples folder.
+> If you need to catch up, or check your work, take a look at `day-3.js` in [the course code samples](http://learn.visualregressiontesting.com/code-samples.zip).
 
 With selenium started we can run our tests!
 
