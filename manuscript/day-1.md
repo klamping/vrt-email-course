@@ -1,6 +1,6 @@
 # Testing Terminology
 
-Hi, and welcome to the first day of six in the "Visual Regression Testing" e-mail course.
+Welcome to the first day of six in the "Visual Regression Testing" e-mail course.
 
 Over the next week, we'll get you started understanding the essentials of writing automated functional tests using WebdriverIO.
 
