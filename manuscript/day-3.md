@@ -1,4 +1,4 @@
-# Using WebdriverCSS
+# Real Visual Regression Testing with WebdriverCSS
 
 It's Day 3! We've spent the past two days getting things in place. Today is the day we finally get into WebdriverCSS!
 

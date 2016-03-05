@@ -1,4 +1,4 @@
-# Advanced Test Actions
+# Take Action with WebdriverIO Commands
 
 Yesterday we took a look at using WebdriverCSS to capture screenshots of our page. This is the root of visual regression testing and adds a valuable tactic to our regression testing toolbox.
 

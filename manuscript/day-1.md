@@ -1,4 +1,4 @@
-# Testing Terminology
+# What you Need to Know about Visual Regression Testing
 
 Welcome to the first day of six in the "Visual Regression Testing" e-mail course.
 
