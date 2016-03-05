@@ -32,7 +32,7 @@ webdrivercss.init(browser);
 We are going to just leave WebdriverCSS at its default settings, but if you wanted to update the instance options like we did with `wdio.remote(options)` you can pass those options in as an object after the browser variable.
 
 ```js
-require("webdrivercss").init(browser, {
+webdrivercss.init(browser, {
     screenshotRoot: "my-shots",
     failedComparisonsRoot: "diffs",
     misMatchTolerance: 0.05,
@@ -70,11 +70,11 @@ The function takes 3 different parameters:
   6. __y__: You can specify a fixed y coordinate for your screenshot (requires width/height)
   7. __screenWidth__: Pass through an array of screen widths to test this element at
   8. Various other [properties to hide, remove or exclude](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#usage) parts of the page, which can be useful in order to ignore dynamic components such as advertisements.
-3. __The Callback__: This function answers the "Ok I've got all of these images, what do I do now"? We'll leave it alone for now, but in a later email we are going to be use it to ensure that the image WebdriverCSS returns matches our baseline images.
+3. __The Callback__: This function answers the "Ok I've got all of these images, what do I do now"? We'll leave it alone for now, but in a later lessons we are going to be use it to ensure that the image WebdriverCSS returns matches our baseline images.
 
 ### Putting it all together
 
-Now that we've explained the parts of this function, let's see webdriverCSS in action:
+Now that we've explained the parts of this function, let's see webdriverCSS in action capturing images:
 
 ```js
 browser
@@ -94,7 +94,7 @@ browser
   .end();
 ```
 
-We've decided to test two different elements on our homepage: the header and the benefits section.
+We've decided to capture two different elements on our homepage: the header and the benefits section.
 
 The header doesn't change over different breakpoints, but the benefits section does. So to make sure we test each of those breakpoints we use the `screenWidth` parameter in the second set of options. This will produce a total of three images, one for each viewport size.
 
@@ -139,13 +139,15 @@ The first four images listed (without baseline in the name) are the full page sc
 
 ## Storing Baseline Images
 
-These baseline images get stored in the Git repo like any other file (although you may want to [use a `.gitignore` file](https://github.com/webdriverio/webdrivercss/blob/master/examples/.gitignore) to skip the `.regression.` and `diff` images). This makes it simple to share baseline images across teams. It also allows for changes in the baseline to be tracked over time and viewed in pull requests.
+
+These baseline images should get stored in the Git repo like any other file (although you may want to [use a `.gitignore` file](https://github.com/webdriverio/webdrivercss/blob/master/examples/.gitignore) to skip the `.regression.` and `diff` images). This makes it simple to share baseline images across teams. It also allows for changes in the baseline to be tracked over time and viewed in pull requests.
+
 
 Be aware that if team members or testing platforms are not using the same OS, the baseline images might differ slightly. A common example is that a baseline will work for local testing on OSX, but the same baseline image fails when TravisCI runs the same visual regression test since it is Linux-based.
 
 ## Updating baseline images
 
-Eventually our design is going to change, and when it does, we need to make sure that our new baseline images accompany our style changes. 
+Eventually our design is going to change, and when it does, we need to make sure that our new baseline images accompany our style changes.
 
 If we increase the font size of our main header, our commit should include not just the new css, but the new baseline file as well. The reason for this is so that the next person that downloads our new CSS will also have a baseline image of our header with that larger text.
 
