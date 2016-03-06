@@ -8,7 +8,9 @@ Websites aren't static. When you visit one, you're taking all sorts of actions. 
 
 So far though, our tests haven't done much. We've simply loaded our page, checked a title, and taken a few screenshots. What about our dropdown menus? What about form fields? Certainly we can test those things as well!
 
-We can! Not only that, we also take another set of screenshots after those actions for another level of visual tests. Here's what our tests for the main navigation on our page could look like:
+Not only that, we can then take another set of screenshots after those actions are completed for a second round of visual tests, capture the dynamic aspects of your site.
+
+Here's what our tests for the main navigation on our page could look like:
 
 1. Load the page
 2. Screenshot the main nav (default state)
