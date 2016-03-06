@@ -15,7 +15,7 @@ If your new to NodeJS or unfamiliar with NPM, have a look at [their about page](
 Now that we've got a place to store our dependency information, let's get them installed (which will also update the `package.json` file with our dependency information). In the same command line, run:
 
 ```sh
-npm install --save webdriverio@3.3.0 webdrivercss@2.0.0beta-rc1 selenium-standalone
+npm install --save webdriverio@3.4.1 webdrivercss@2.0.0beta-rc1 selenium-standalone
 ```
 
 This will install the needed tools to run your tests. They are:
@@ -24,7 +24,7 @@ This will install the needed tools to run your tests. They are:
 
 WebdriverIO works by taking our JavaScript test instructions and passing them along to Selenium, which will tell the browser what actions to take.
 
-WebdriverIO's docs say that it "makes it possible to write super easy Selenium tests" and we have to agree. Being able to construct tests in JavaScript is empowering; we don't have to learn Java to write automation!
+WebdriverIO claims it "makes it possible to write super easy Selenium tests" and we have to agree. Being able to construct tests in JavaScript is empowering; we don't have to learn Java to write automation!
 
 ## WebdriverCSS
 
@@ -37,9 +37,9 @@ You can do a fair amount of configuration with the tool, but for now, those two 
 
 ### Selenium Standalone
 
-It was a mess the first time we tried setting up Selenium. We had to scour the official site and determine whether we needed the standalone server or the browser plugins or maybe even something called "the grid". We didn't get far.
+Years ago, setting up Selenium could be quite a mess. You had to scour the official site and determine whether you needed the standalone server or the browser plugins or maybe even something called "the grid". It was tough to make progress.
 
-Luckily, this has been incredibly simplified for us with the Selenium-Standalone NPM module. On our command, it will spin up a selenium standalone server (which is the tool we want). This server will be used by WebdriverIO to run our tests.
+Luckily, this has been incredibly simplified for us with the selenium-standalone NPM module. On our command, it will spin up a selenium standalone server (which is the tool we want). This server will be used by WebdriverIO to run our tests.
 
 Let's go ahead and do that now. Back in the command line, you'll first install the server locally*:
 
@@ -59,7 +59,7 @@ This will be a constantly-running service, so you'll need to open a new command 
 
 ## Disclaimer
 
-In the code examples for the rest of the course, for brevity's sake we'll sometimes leave out repetitive bits of the code. To see the full examples, [check out the full code samples for each day](http://learn.visualregressiontesting.com/code-samples.zip).
+For the rest of this course we'll sometimes leave out repetitive bits of the code in our examples. To see the full code, [check out the code samples for each day](http://learn.visualregressiontesting.com/code-samples.zip).
 
 ## Let's write some tests
 
@@ -84,7 +84,7 @@ var browser = wdio.remote(options);
 
 What just happened here? Well, we defined the characteristics of our browser (we want firefox, don't really care about the version or other details), then passed that information to WebdriverIO. WebdriverIO then creates a `browser` object with all the details ready to go.
 
-We're not quite done with the set up phase. We have to kick everything off for good by calling `init`:
+We're not quite done with the setup phase. We have to kick everything off for good by calling `init`:
 
 ```js
 browser.init();
@@ -126,7 +126,7 @@ A few things:
 
 We're getting close to running our test to try it out. Just one more thing and we'll let you know the secret command to make the magic happen.
 
-We've got the page loaded, but let's validate that it's actually the right place. We can do that by checking the title of the page and logging it through `console.log`. Let's take a look at the syntax:
+The page says it's loaded, but let's validate that it's actually the right place. We can do that by checking the title of the page and logging it through `console.log`. Let's take a look at the syntax:
 
 ```js
 browser
@@ -160,7 +160,7 @@ browser
 	});
 ```
 
-Hopefully yours matches that. If so, it's time to run the test! You can do so by asking node (via the command line) to ever so kindly execute your code:
+Hopefully yours matches that. If so, it's time to run the test! You can do so by asking Node (via the command line) to ever so kindly execute your code:
 
 ```sh
 node tests.js
@@ -176,7 +176,7 @@ Title is: welcome
 
 Okay, we have a confession to make. We may have left the browser just sitting there after the tests finished, and now it's wondering what in the world is going on. You should go ahead and close that window and let the browser be at peace.
 
-We forgot to tell you to lets WebdriverIO know that the tests are over and it can shut things down. That's okay though, it's really simple to do that. Just use the `end` command. Here's what the basic structure of your tests will look like:
+We forgot to tell you to let WebdriverIO know that the tests are over and it can shut things down. That's okay though, it's really simple to do that. Just use the `end` command. Here's what the basic structure of your tests will look like:
 
 ```js
 browser
@@ -201,8 +201,8 @@ Run the same Node command and your tests will run, but this time the browser wil
 
 ### Tomorrow's outlook  
 
-So, how does it feel to have programmatically taken control of a  browser? A little awesome, right? Okay, if you're underwhelmed, that's because we didn't really test much. We only peaked at the page title then closed everything down before we got ourselves in trouble.
+So, how does it feel to have programmatically taken control of a browser? A little awesome, right? Okay, if you're underwhelmed, that's because we didn't really test much. We only peaked at the page title then closed everything down before we got ourselves in trouble.
 
-We promise that over the next couple of days we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and a very real visual tests.
+We promise that over the next couple of days we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and very real visual tests.
 
 If you can't wait until then, take a look at [the WebdriverIO API page](http://webdriver.io/api.html) to see a full list of commands available for use.

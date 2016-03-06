@@ -105,6 +105,7 @@ To view the results of this test we first need to make sure that we have seleniu
 ```sh
 ./node_modules/.bin/selenium-standalone install
 ```
+
 ### Start Selenium
 
 Once selenium is installed we can start it up by running this command in your terminal:
@@ -112,6 +113,7 @@ Once selenium is installed we can start it up by running this command in your te
 ```sh
 ./node_modules/.bin/selenium-standalone start
 ```
+
 ### Run Our Tests
 
 > If you need to catch up, or check your work, take a look at `day-3.js` in [the course code samples](http://learn.visualregressiontesting.com/code-samples.zip).
