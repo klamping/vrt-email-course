@@ -33,19 +33,22 @@ var menuIcon = {
 browser
     .init()
     .url("http://outdatedbrowser.com/en")
-    .webdrivercss("Main Menu Menu Icon", menuIcon)
+    .webdrivercss("Main Menu Icon", menuIcon)
     .click(menuIcon.elem)
     .end();
 ```
 
 This works almost exactly the same as a left click with your mouse button. That's the beauty of Selenium. It's as if you took the action yourself!
 
-Now that we've clicked the nav, it should be open. Let's add another WebdriverCSS test for this state:
+Now that we've clicked the nav, it should be open. Let's add another WebdriverCSS test to capture the opened menu:
 
 ```js
+
+var menuIcon = {...};
+
 var menu = {
     name: "Menu",
-    elem: ".main-menu "
+    elem: ".main_menu "
 };
 
 browser
@@ -191,7 +194,7 @@ This works much the same way the `getTitle` command shown in Day 2 works. The va
 
 ## The Full Tests
 
-That sure was a lot, huh? Be sure to check out [the code samples](http://learn.visualregressiontesting.com/code-samples.zip) for Day 4 to see the entirety of the navigation and login tests. 
+That sure was a lot, huh? Be sure to check out [the code samples](http://learn.visualregressiontesting.com/code-samples.zip) for Day 4 to see the entirety of the navigation and login tests.
 
 ## Finishing up
 
