@@ -6,7 +6,7 @@ In our attempt to automate our work, we haven't really automated it yet, because
 
 ## What are Assertions
 
-Assertions allow us to programmatically compare values. They're no different than regular if statements. You can say "x should equal y" or "z should be larger than x".
+Assertions allow us to programmatically compare values. They're no different than regular `if` statements. You can say "x should equal y" or "z should be larger than x".
 
 In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and so much more.
 
