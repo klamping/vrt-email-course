@@ -4,7 +4,7 @@ So far, we've been doing our fair share of manual work when running the tests. E
 
 In our attempt to automate our work, we haven't really automated it yet, because the program does not report errors and prevent mistakes from being deployed. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions."
 
-## What are Assertions
+## What are Assertions?
 
 Assertions allow us to programmatically compare values. They're no different than regular `if` statements. You can say "x should equal y" or "z should be larger than x".
 
@@ -61,11 +61,11 @@ browser
     .init()
     .url("http://learn.visualregressiontesting.com")
     .getTitle()
-    .then(function(title){ 
+    .then(function(title){
         assert.equal(title, "Learn Visual Regression Testing");
     })
     .isVisible(emailSignup.elem)
-    .then(function(isFormVisible){ 
+    .then(function(isFormVisible){
         assert.ok(isFormVisible);
     })
     .end();
@@ -75,7 +75,7 @@ browser
 
 So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will throw an error and fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed.
 
-As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like Jenkins to mark a build as failed (if you're interested in more on the CICD process, the in-depth visual regression testing course covers it all).
+As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like [Jenkins](https://jenkins-ci.org/) or [TravisCI](https://travis-ci.org/) to mark a build as failed (if you're interested in more on the CICD process, the upcoming in-depth visual regression testing course will cover it all).
 
 ## Asserting Screenshots
 
@@ -85,6 +85,13 @@ The `webdrivercss` command has a special option which allows you to run a functi
 
 
 ```js
+var assert = require("assert");
+
+var emailSignup = {
+    name: "Form",
+    elem: ".email-signup"
+};
+
 browser
     .init()
     .url("http://learn.visualregressiontesting.com")
@@ -97,14 +104,16 @@ browser
 
 We assert two things:
 
-1. That `err` isn't an error (if it is something went wrong)
+1. That `err` isn't an error (if it is, something went wrong)
 2. The `shots.Form[0].isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
 
-That's fairly simple, but if it looks complex to you, we have bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get even more complicated. 
+That's fairly simple, but if it looks complex to you, we have bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get even more complicated.
 
 It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss/pull/140) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in (don't worry, you don't have to memorize all of this):
 
 ```js
+var assert = require("assert");
+
 var emailSignup = {
     name: "Form",
     elem: ".email-signup"
@@ -137,6 +146,10 @@ function assertShots (err, shots) {
     })
   });
 };
+
+var assert = require("assert");
+
+var emailSignup = {...};
 
 var emailField = ".email"
 

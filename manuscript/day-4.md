@@ -42,6 +42,8 @@ browser
 
 This works almost exactly the same as a left click with your mouse button. That's the beauty of Selenium. It's as if you took the action yourself!
 
+### Capturing the opened menu
+
 Now that we've clicked the nav, it should be open. Let's add another WebdriverCSS test to capture the opened menu:
 
 ```js
@@ -64,9 +66,14 @@ browser
 
 Look at that! You now have a visual regression test for two states of your navigation. You could easily take this further if you have more than one level in your navigation hierarchy (hello, mega dropdowns!)
 
+### Result of clicking on navigation item
+
 For our needs, we want to see what the page looks like after clicking a menu item. WebdriverIO automatically waits for the page to load after the click, so it's a pretty simple addition to our test:
 
 ```js
+var menuIcon = {...};
+var menu = {...};
+
 var projectLink = mainNav.elem + " a[href$=project]";
 
 browser
@@ -116,6 +123,9 @@ browser
 Then, you can set the text of the username using [the `setValue` command](http://webdriver.io/api/action/setValue.html):
 
 ```js
+
+var loginForm = {...};
+
 var username = loginForm.elem + " #login-email-field";
 
 browser
@@ -138,11 +148,15 @@ browser
     .end();
 ```
 
-It's important to note here that `setValue` only works with "interactable" elements
+It's important to note here that `setValue` only works with "interactable" elements like text input fields.
 
 Let's repeat that with the password:
 
 ```js
+
+var loginForm = {...};
+var username = {...};
+
 var password = loginForm.elem + " #login-password-field_";
 
 browser
@@ -173,9 +187,14 @@ browser
 
 ### Looking for Elements
 
-Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdrivercss calls removed for brevity):
+Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdriverCSS calls removed for brevity):
 
 ```js
+
+var loginForm = {...};
+var username = {...};
+var password = ...;
+
 var error = ".error-message";
 
 browser
