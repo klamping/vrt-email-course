@@ -68,7 +68,7 @@ Look at that! You now have a visual regression test for two states of your navig
 
 ### Result of clicking on navigation item
 
-For our needs, we want to see what the page looks like after clicking a menu item. WebdriverIO automatically waits for the page to load after the click, so it's a pretty simple addition to our test:
+For our needs, we want to see what the page looks like after clicking a menu item and loading the new page. WebdriverIO automatically waits for the page to load after the click, so it's a pretty simple addition to our test:
 
 ```js
 var menuIcon = {...};
@@ -148,7 +148,7 @@ browser
     .end();
 ```
 
-It's important to note here that `setValue` only works with "interactable" elements like text input fields.
+It's important to note here that `setValue` only works with form elements like text input fields.
 
 Let's repeat that with the password:
 
@@ -187,7 +187,7 @@ browser
 
 ### Looking for Elements
 
-Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (webdriverCSS calls removed for brevity):
+Most forms will show an error if the wrong username or password was used. We can test for the visibility of the error element using [the `isVisible` command](http://webdriver.io/api/state/isVisible.html) (WebdriverCSS calls removed for brevity):
 
 ```js
 
@@ -219,6 +219,6 @@ That sure was a lot, huh? Be sure to check out [the code samples](http://learn.v
 
 ## Finishing up
 
-Did you catch all that? We just put a lot of pieces together to make two useful tests. You can easily expand on this to round out your tests with even more depth.
+Did you catch all that? We just put a lot of pieces together to make two useful tests. You can easily expand on this to add even more depth to your tests.
 
 Tomorrow, we're going to take a look at how to make catching failures a little less manual. Until then, write some in-depth tests on your own!
