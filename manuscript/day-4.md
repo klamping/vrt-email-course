@@ -74,7 +74,7 @@ For our needs, we want to see what the page looks like after clicking a menu ite
 var menuIcon = {...};
 var menu = {...};
 
-var projectLink = mainNav.elem + " a[href$=project]";
+var projectLink = menu.elem + " a[href$=project]";
 
 browser
     .init()
