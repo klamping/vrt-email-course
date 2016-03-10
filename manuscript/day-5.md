@@ -6,11 +6,11 @@ In our attempt to automate our work, we haven't really automated it yet, because
 
 ## What are Assertions?
 
-Assertions allow us to programmatically compare values. They're no different than regular `if` statements. You can say "x should equal y" or "z should be larger than x".
+Assertions allow us to programmatically compare values. They allow us to validate statements like "x should equal y" and "z should be larger than x".
 
-In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and so much more.
+In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and more.
 
-For example, if you navigate from the home page to the about page, you'd want to assert that the page title has been updated. You would say, "The browser page title should equal 'About Us'".
+For example, if you navigate from the Home page to the About page, you'd want to assert that the page title has been updated. You would say, "The browser page title should equal 'About Us'".
 
 Assertions are very similar to website requirements. "The link should change color on hover" is a simple functional test assertion. In fact, if you have a requirements doc for you site, that's a great place to determine what tests you should write.
 
@@ -75,7 +75,7 @@ browser
 
 So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will throw an error and fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed.
 
-As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like [Jenkins](https://jenkins-ci.org/) or [TravisCI](https://travis-ci.org/) to mark a build as failed (if you're interested in more on the CICD process, the upcoming in-depth visual regression testing course will cover it all).
+As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like [Jenkins](https://jenkins-ci.org/) or [TravisCI](https://travis-ci.org/) to mark a build as failed (if you're interested in more on the CICD process, we hope to release an in-depth Visual Regression Testing course later this year which will cover it all).
 
 ## Asserting Screenshots
 
@@ -114,10 +114,7 @@ It would be a waste of email to get in to the real details of it all, so you're 
 ```js
 var assert = require("assert");
 
-var emailSignup = {
-    name: "Form",
-    elem: ".email-signup"
-};
+var emailSignup = { ... };
 
 browser
     .init()
@@ -134,7 +131,9 @@ browser
     .end();
 ```
 
-While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same snippet of code throughout our tests, we can make it a standalone function and call it when needed:
+Here, we loop through all the shots taken, then assert each shot combo for `isWithinMisMatchTolerance`. 
+
+While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same piece of code throughout our tests, we can make it a standalone function and call it when needed:
 
 ```js
 function assertShots (err, shots) {
@@ -173,7 +172,7 @@ If you'd like the function as an easy copy/paste solution, have a look at [the s
 assert.equal(theEnd, true);
 ```
 
-Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it over. Assertions are a very powerful tool to bring in to your testing arsenal.
+Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it done. Assertions are a very powerful tool to bring in to your testing arsenal.
 
 While Node's `assert` library is useful for getting started, it's missing a lot of great features. Check out these tools to really take advantage of the "assertion" concept:
 
