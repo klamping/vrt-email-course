@@ -15,7 +15,7 @@ If your new to NodeJS or unfamiliar with NPM, have a look at [their about page](
 Now that we've got a place to store our dependency information, let's get them installed (which will also update the `package.json` file with our dependency information). In the same command line, run:
 
 ```sh
-npm install --save webdriverio@3.4.1 webdrivercss@2.0.0beta-rc1 selenium-standalone
+npm install --save webdriverio@3.4.0 webdrivercss@2.0.0beta-rc1 selenium-standalone
 ```
 
 This will install the needed tools to run your tests. They are:
