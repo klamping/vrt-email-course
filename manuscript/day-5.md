@@ -109,7 +109,7 @@ We assert two things:
 
 That's fairly simple, but if it looks complex to you, we have bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get even more complicated.
 
-It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss/pull/140) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in (don't worry, you don't have to memorize all of this):
+It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss#let-your-test-fail-when-screenshots-differ) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in (don't worry, you don't have to memorize all of this):
 
 ```js
 var assert = require("assert");
