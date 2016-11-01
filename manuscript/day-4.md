@@ -29,7 +29,7 @@ Just like our previous actions, we're going to use a WebdriverIO command to clic
 ```js
 var menuIcon = {
     name: "Menu Icon",
-    elem: ".menu "
+    elem: ".menu a"
 };
 
 browser
@@ -144,7 +144,7 @@ browser
     .url("https://codepen.io/login")
     .webdrivercss("Login Default", loginForm)
     .setValue(username, "admin")
-    .webdrivercss("Login w/Username", loginForm)
+    .webdrivercss("Login Username", loginForm)
     .end();
 ```
 
