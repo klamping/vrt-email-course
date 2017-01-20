@@ -1,52 +1,48 @@
-# What you Need to Know about Visual Regression Testing
+# What to know about Visual Regression Testing
 
-Welcome to the first day of six in the "Visual Regression Testing" e-mail course.
+Hey Folks, Micah and Kevin here from visualregressiontesting.com. 
 
-Over the next week, we'll get you started understanding the essentials of writing automated functional tests using WebdriverIO.
+Over the next week, you're going to learn the essentials Visual Regression Testing.
 
-At the end of the week, you will have all the knowledge you need to write an elementary set of tests, and you may be surprised just how handy they are during your next site update.
-
-You may also be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in our book.
+You may be surprised by how much fun writing these tests will be. After all, you're teaching a computer how to use your website! That's pretty neat in our book.
 
 ## Some Terminology
 
-Let's kick off day one by expanding your vocabulary with a few new terms that we'll be repeating over and over throughout the course:
+Let's kick it off by expanding our vocabulary. We'll be using these terms throughout the course:
 
-### Regressions
+### Regression Testing
 
 Change hurts. Especially when it's unwanted.
 
-"Regressions" are changes, bad ones, to the functionality of your site. To say you've found a "regression" means there is code that used to be working as expected, but is no longer meeting expectations.
+"Regressions" are changes, bad ones, to the functionality of your site. To say you've found a "regression" means you found code that used to work but no longer does.
 
-"Regression Testing" relates to the type of tests that check for new bugs in existing functionality after a new feature or fix goes in.
+"Regression Testing" is a type of testing that checks for these bugs in existing functionality after an update. 
 
-While you definitely want to put new code through the wringer, it's also important to look at existing features to ensure they weren't adversely affected by the updates.
+While you definitely want to put new code through the wringer, it's also important to look at existing features to ensure they weren't adversely affected by the updates. That's what regression testing does.
 
-### Automation
+### Automated Testing
 
-Do you hear automation and think of robots replacing assembly line workers? Does it make you think that some automated script will replace your job?
+Automation comes in many forms, whether through robots or driverless cars. For us, it's writing code that "automates" actions on a website, similar to how AI is written to "automate" driving a car.
 
-While the goal of automation is to test a website without a human clicking links and entering text, in no way can it take the place of hard-working people.
+While the goal of website automation is to test without a human clicking links and entering text, in no way can it take the place of hard-working people.
 
 First of all, someone has to write the automation and know how to keep it up to date. That can easily be a full-time job on a large enough application.
 
-But there is also a lot of nuance to tests. Checking to see if an animation worked as designed is difficult (and maybe impossible) right now with automated tests.
-
-There are so many moving parts to our sites (and they're becoming more complex each day) that automation simply aims to handle the boring, repetitive tasks, leaving you time to dig deep in to the details of the implementation.
+But there is also a lot of nuance to websites. Checking to see if an animation worked as designed is very difficult with automated tests. Automation simply aims to handle the boring, repetitive tasks, leaving you time to test the hard stuff.
 
 ### Functional Testing
 
 There are many types of software testing out there; [Wikipedia has an extensive list of the various definitions](https://en.wikipedia.org/wiki/Software_testing#Testing_types).
 
-In this course, we're focused on "functional" testing. This type of testing checks the functionality of your website and ensures that it works properly. It does not mean you're testing JavaScript "functions" (that would be unit testing).
+We're focusing on "functional" testing, which checks the UI functionality of a website and ensures that it works properly. This is not the same as testing JavaScript functions (that would be unit testing).
 
-Frankly, you could probably call it "system testing" or "end-to-end tests," but for our course we'll be using the term "functional testing."
+Functional testing also goes by "system testing", "end-to-end tests" and many other monikers, but for our course we'll use the term "functional testing".
 
 ### Visual Testing
 
 There's one last term to cover, and that's the concept of "visual testing." In this course, we'll talk about both standard testing (e.g. make sure certain text is on the page) and visual testing (e.g. make sure the page looks the same as before).
 
-Visual regression testing opens up a lot of benefits to us. Just because an element is on a page does not mean it's in the right location (or the right size or color).
+Visual Regression Testing has a unique set of benefits. Just because an element is on a page does not mean it's in the right location (or the right size or the right color).
 
 With visual testing, we take screenshots of various parts of the page to serve as the "baseline" of how the site should work. Then in subsequent test runs, we take new screenshots and compare to those baselines. Any differences are flagged for review.
 
@@ -77,8 +73,8 @@ Basically, it's not magic (although it feels like it at times). There are certai
 We'll go in to installation of the tools tomorrow, but here's what we'll be using:
 
 - [Selenium](https://en.wikipedia.org/wiki/Selenium_(software)) - A browser automation tool
-- [WebdriverIO](http://webdriver.io/) - A Node.js library to drive Selenium
-- [WebdriverCSS](https://github.com/webdriverio/webdrivercss) - An add-on to WebdriverIO to help with visual regression testing
+- [WebdriverIO](http://webdriver.io/) - A Node.js library to talk to Selenium
+- [WebdriverCSS](https://github.com/visualregressiontesting/webdrivercss) - An add-on to WebdriverIO to help with Visual Regression Testing
 
 ## Course Requirements (aka today's homework)
 
