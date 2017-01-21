@@ -1,130 +1,82 @@
 # Real Visual Regression Testing with WebdriverCSS
 
-It's Day 3! We've spent the past two days getting things in place. Today is the day we finally get into WebdriverCSS!
+It's Day 3! We've spent the past two days getting things in place. Today is the day we finally use WebdriverCSS!
 
-Before we get going, we need to install one more dependency. GraphicsMagick is a piece of computer software required to perform image manipulation and comparison. It'll allow us to crop and compare our baseline images with current images, and tell us if there are any differences between the two.
+## GraphicsMagick
 
-## Installation
+So we need to install one more tool.
 
-1. [Install GraphicsMagick](https://github.com/webdriverio/webdrivercss#install)
-2. You should have WebdriverCSS, WebdriverIO and selenium-standalone installed already. If not, go back and look at day 2.
+GraphicsMagick is software that performs image manipulation and comparison. It allows us to compare our images, and let us know when there are differences between the two.
 
+To install it, [follow the instructions in the WebdriverCSS Readme](https://github.com/visualregressiontesting/webdrivercss#install). Be forewarned that you may need to  uninstall 'ImageMagick' if you have it installed. Yes, they're different software, and they don't always get along.
+
+To test your installation, run `gm` from the command line. You should see a response that looks like:
+
+```sh
+GraphicsMagick 1.3.21 2015-02-28 Q8 http://www.GraphicsMagick.org/
+Copyright (C) 2002-2014 GraphicsMagick Group.
+Additional copyrights and licenses apply to this software.
+See http://www.GraphicsMagick.org/www/Copyright.html for details.
+Usage: gm command [options ...]
+```
 
 ## Setting Up WebdriverCSS
 
-We are going to need to make a couple changes to our `tests.js` file, the first one being adding a require statement to load WebdriverCSS.
+Now that we have that installed, it's time to make some changes to our `tests.js` file. First, we load and initialize WebdriverCSS.
+
+On a new line after your '.init(...)' code, add:
 
 ```js
-var wdio = require("webdriverio");
-var webdrivercss = require("webdrivercss");
+require('webdrivercss').init(browser);
 ```
 
-We are now leveraging the power of WebdriverIO along with our visual regression framework, WebdriverCSS.
+This appends the 'webdrivercss' command to our `browser` object.
 
-## Initializing the Browser...Again
+## Writing our first Visual Regression Tests
 
-In order to get our `webdrivercss` command into the browser instance we created in our last lesson, we need to pass that instance into `webdrivercss.init()` like:
-
-```js
-webdrivercss.init(browser);
-```
-
-We are going to just leave WebdriverCSS at its default settings, but if you wanted to update the instance options like we did with `wdio.remote(options)` you can pass those options in as an object after the browser variable.
+Let's replace that almost useless 'getTitle' command with a much more useful 'webdrivercss' one:
 
 ```js
-webdrivercss.init(browser, {
-    screenshotRoot: "my-shots",
-    failedComparisonsRoot: "diffs",
-    misMatchTolerance: 0.05,
-    screenWidth: [320,480,640,1024],
-    updateBaseline: false
-});
-```
-
-If you want to learn more about those options you can read about them on the [WebdriverCSS Github Repo](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#setup).
-
-## Writing our first visual regression tests
-
-We're almost there! We've got all of the pieces in place, and we are ready to write our first WebdriverCSS test.
-
-Lets first look at the anatomy of the WebdriverCSS command.
-
-Just like the `.url()` and the `.getTitle()` function we used yesterday, `.webdrivercss()` is a chainable, promise based function that is typically placed directly after the `.url()` call.
-
-```js
-browser
-  .init()
-  .url("https://learn.visualregressiontesting.com")
-  .webdrivercss("some_id", [{options}], callback);
-```
-
-The function takes 3 different parameters:
-
-1. __An ID__: Each WebdriverCSS test needs to have a unique ID. This value will be the prefix for all of the screenshot file names, and should therefore follow traditional naming conventions like no spaces, dashes, slashes, or special characters.
-2. __Options__: an array of option objects, each one representing a different part of the page that you would like to test. Properties in the objects include:
-  1. __name__: Name of the captured element
-  2. __elem__: Selector of the element you want to capture
-  3. __width__: You can specify a fixed width for your screenshot
-  4. __height__: You can specify a fixed height for your screenshot
-  5. __x__: You can specify a fixed x coordinate for your screenshot (requires width/height)
-  6. __y__: You can specify a fixed y coordinate for your screenshot (requires width/height)
-  7. __screenWidth__: Pass through an array of screen widths to test this element at
-  8. Various other [properties to hide, remove or exclude](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#usage) parts of the page, which can be useful in order to ignore dynamic components such as advertisements.
-3. __The Callback__: This function answers the "Ok, I've got all of these images, what do I do now?" question. We'll leave it alone for now, but in a later lesson we are going to use it to programatically validate that the images WebdriverCSS returned match our baseline images.
-
-### Putting it all together
-
-Now that we've explained the parts of this function, let's see WebdriverCSS in action capturing images:
-
-```js
-browser
-  .init()
-  .url("https://learn.visualregressiontesting.com")
-  .webdrivercss("homepage",[
-        {
-            name: "header",
-            elem: ".header"
-        },
-        {
-            name: "benefits",
-            elem: ".benefits",
-            screenWidth: [320,640,1024]
-        }
-    ])
+browser.url("https://learn.visualregressiontesting.com")
+  .webdrivercss("homepage", [
+    {
+      name: "header",
+      elem: ".header"
+    },
+    {
+      name: "benefits",
+      elem: ".benefits",
+      screenWidth: [320,640,1024]
+    }
+  ])
   .end();
 ```
 
-We've decided to capture two different elements on our homepage: the header and the benefits section.
+In our code, we're capturing two different elements on our homepage: the header and the benefits section.
 
-The header doesn't change over different breakpoints, but the benefits section does. So to make sure we test each of those breakpoints we use the `screenWidth` parameter in the second set of options. This will produce a total of three images, one for each viewport size.
+The header doesn't change over different breakpoints, but the benefits section does. So to make sure we test each of those breakpoints we use the `screenWidth` parameter in the second set of options. This will produce a total of three images for the benefits element, one for each viewport size.
 
-### Checking the Results
+If you'd like to learn more about the options available to you, [check out the documentation](https://github.com/visualregressiontesting/webdrivercss#usage).
 
-To view the results of this test we first need to make sure that we have Selenium running. If you haven't installed Selenium yet make sure that you have the selenium-standalone node package installed and run:
+### Is your ChromeDriver Running?
 
-```sh
-./node_modules/.bin/selenium-standalone install
-```
-
-### Start Selenium
-
-Once Selenium is installed we can start it up by running this command in your terminal:
+Remember last email where we had you start ChromeDriver? Yeah, do that again:
 
 ```sh
-./node_modules/.bin/selenium-standalone start
+./node_modules/.bin/chromedriver --url-base=/wd/hub --port=4444
 ```
 
 ### Run Our Tests
 
 > If you need to catch up, or check your work, take a look at `day-3.js` in [the course code samples](http://learn.visualregressiontesting.com/code-samples.zip).
 
-With Selenium started we can run our tests!
+With ChromeDriver started, and WebdriverCSS ready to go, let's run our tests!
 
 ```sh
 node tests.js
 ```
 
-To see the results of our tests, take a look in the newly created `webdrivercss` folder. In this folder you'll see the following files:
+To see the results of our tests, open up the newly created `webdrivercss` folder. In this folder you'll see the following files:
 
 ```
 homepage.320px.png
@@ -137,22 +89,35 @@ homepage.benefits.1024px.baseline.png
 homepage.header.baseline.png
 ```
 
-The first four images listed (without baseline in the name) are the full page screenshots WebdriverCSS captures from Firefox. Once those images are captured, WebdriverCSS crops the image down to your specified areas giving you the four baseline images. It's the baseline images we are concerned with, and those that we will be keeping.
+The first four images listed (without `baseline` in their name) are the full page screenshots WebdriverCSS captures from Chrome. Once those images are captured, WebdriverCSS crops the image down to your specified areas giving you the four baseline images.
 
-## Storing Baseline Images
+## Hey, that wasn't a test!
 
+So you may have noticed that we didn't actually test anything. We only took some screenshots of a working page. It isn't until you run your tests with baseline images already there that you'll see a possible diff.
 
-These baseline images should get stored in the Git repo like any other file (although you may want to [use a `.gitignore` file](https://github.com/webdriverio/webdrivercss/blob/master/examples/.gitignore) to skip the `.regression.` and `diff` images). This makes it simple to share baseline images across teams. It also allows for changes in the baseline to be tracked over time and viewed in pull requests.
+Normally this happens after you've done some edits to your page and want to make sure it's working right. For use, we're going to change the url of the page we testing, to simulate a "broken" update.
 
+On the `browser.url` call, change the URL to include `/broke.html`:
 
-Be aware that if team members or testing platforms are not using the same OS, the baseline images might differ slightly. A common example is that a baseline will work for local testing on OSX, but the same baseline image fails when TravisCI runs the same visual regression test since it is Linux-based (or a teammate tries to run the tests on their Windows PC).
+```js
+browser.url("https://learn.visualregressiontesting.com/broke.html")
+```
 
-## Updating baseline images
+## Seeing what's wrong
 
-Eventually our design is going to change, and when it does, we need to make sure that our new baseline images accompany our style changes.
+While the test still ran normally, if you check your `webdrivercss` folder, you may notice two things:
 
-If we increase the font size of our main header, our commit should include not just the new CSS, but the new baseline file as well. The reason for this is so that the next person that downloads our new CSS will also have a baseline image of our header with that larger text.
+1. There are now `regression` versions of the images
+2. The `diff` folder now contains four colorfully pink images.
+
+The regressions are the 'next state' version of your image. It's useful to see the actual image that was captured.
+
+The 'diff' images are a comparison of the `baseline` and `regression` images, highlighting in hot pink anything dissimilar between the two.
+
+## I meant to change that...
+
+If you ever want to recreate your baselines, simply delete the `webdrivercss` folder, run your tests again with your updates in place, and you'll have a new set of baselines for use.
 
 ## Up next
 
-WebdriverCSS allows us to do much more than just snapping pictures. In our next lesson we'll start looking at the advanced features of WebdriverIO to see how we can test interactive elements like mobile navigation and login forms.
+Snapping pictures of the initial page load is good, but what about dynamic content? In our next lesson, we'll learn some advanced features of WebdriverIO and see how to test interactive elements like mobile navigation and login forms.
