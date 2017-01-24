@@ -1,15 +1,12 @@
 var wdio = require("webdriverio");
-var options = {
+var browser = wdio.remote({
   desiredCapabilities: {
-    browserName: "firefox"
+    browserName: "chrome"
   }
-};
-var browser = wdio.remote(options);
+}).init();
 
-browser
-  .init()
-  .url("http://learn.visualregressiontesting.com")
+browser.url("http://learn.visualregressiontesting.com")
   .getTitle().then(function(title) {
-    console.log("Title is: " + title);
+      console.log("Title is: " + title);
   })
   .end();

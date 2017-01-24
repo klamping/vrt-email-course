@@ -1,28 +1,32 @@
 # Catch Failures the Lazy Way
 
-So far, we've been doing our fair share of manual work when running the tests. Every time we execute our test suite, we have to check the screenshots folder for diffs and read the console logs to verify the right messages appear.
+So far, we've been doing our fair share of manual work when running the tests. Every time we execute our test suite, we have to check the screenshots folder for diffs and read the console logs to verify the right content appears.
 
-In our attempt to automate our work, we haven't really automated it yet, because the program does not report errors and prevent mistakes from being deployed. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions."
+In our attempt to automate our work, we haven't really automated it, because the program does not report errors and prevent mistakes from being deployed. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions."
 
 ## What are Assertions?
 
-Assertions allow us to programmatically compare values. They allow us to validate statements like "x should equal y" and "z should be larger than x".
+Assertions allow us to compare and validate two values, like "x should equal y" and "z should be larger than x".
 
 In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and more.
 
-For example, if you navigate from the Home page to the About page, you'd want to assert that the page title has been updated. You would say, "The browser page title should equal 'About Us'".
+For example, in our last test we navigated from the homepage to the project page. We also print out the url of the project page, to check that we're on the new page.
 
-Assertions are very similar to website requirements. "The link should change color on hover" is a simple functional test assertion. In fact, if you have a requirements doc for you site, that's a great place to determine what tests you should write.
+Our assertion for this would be "The page url contains 'project'".
+
+Assertions are very similar to website requirements. "The link should change color on hover" is a simple functional test assertion. In fact, if you have a requirements document for you site, that's a great place to determine what tests you should write.
 
 ## Writing Assertions
 
-[Node comes with an assertion library built-in](https://nodejs.org/docs/latest/api/assert.html), so we're going to use it to keep things simple. We can load it the same way we loaded WebdriverIO, by using a `require` statement:
+[Node comes with an assertion library built-in](https://nodejs.org/docs/latest/api/assert.html). Let's use it to keep things simple.
+
+We'll load it the same way we loaded WebdriverIO, by using a `require` statement:
 
 ```js
 var assert = require("assert");
 ```
 
-Once loaded, we can make basic assertions like:
+A basic assertion with it looks like:
 
 ```js
 var x = 1;
@@ -47,26 +51,15 @@ And this would pass, as 1 does not equal 2 (at least not in this universe).
 
 ## WebdriverIO and Assertions
 
-How does this relate to our needs? We can throw an assert in our `getTitle` and `isVisible` checks:
+How does this relate to our needs? Well, first, we can use `assert` in our `getUrl` check:
 
 ```js
 var assert = require("assert");
 
-var emailSignup = {
-    name: "Form",
-    elem: ".email-signup"
-};
-
-browser
-    .init()
-    .url("http://learn.visualregressiontesting.com")
-    .getTitle()
-    .then(function(title){
-        assert.equal(title, "Learn Visual Regression Testing");
-    })
-    .isVisible(emailSignup.elem)
-    .then(function(isFormVisible){
-        assert.ok(isFormVisible);
+browser.url("http://outdatedbrowser.com/en")
+		... other steps here ...
+		.getUrl().then(function(url) {
+        console.log("Page url is: " + url);
     })
     .end();
 ```

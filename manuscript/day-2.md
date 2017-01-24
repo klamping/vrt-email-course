@@ -1,4 +1,4 @@
-# Write Your First Regression Test Today
+# Today you're going to write your first regression test
 
 Day 2 is here; we hope you're ready to dig in. Let's start with some installs!
 

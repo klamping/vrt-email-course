@@ -1,20 +1,14 @@
 var wdio = require("webdriverio");
-var webdrivercss = require("webdrivercss");
-
-var options = {
+var browser = wdio.remote({
   desiredCapabilities: {
-    browserName: "firefox"
+    browserName: "chrome"
   }
-};
+}).init();
 
-var browser = wdio.remote(options);
+require('webdrivercss').init(browser);
 
-webdrivercss.init(browser);
-
-browser
-  .init()
-  .url("https://learn.visualregressiontesting.com")
-  .webdrivercss("homepage",[
+browser.url("http://learn.visualregressiontesting.com")
+  .webdrivercss("homepage", [
     {
       name: "header",
       elem: ".header"

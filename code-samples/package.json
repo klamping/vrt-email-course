@@ -1,18 +1,15 @@
 {
   "name": "@visualregressiontesting/code-samples",
   "version": "1.0.0",
-  "dependencies": {
-    "selenium-standalone": "^5.0.0",
-    "webdrivercss": "^2.0.0-beta-rc1",
-    "webdriverio": "^3.3.0"
-  },
   "devDependencies": {},
   "scripts": {
     "test": "mocha"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "main": "day-2.js",
-  "description": ""
+  "dependencies": {
+    "chromedriver": "^2.27.2",
+    "webdrivercss": "github:visualregressiontesting/webdrivercss",
+    "webdriverio": "^4.6.1"
+  }
 }
