@@ -118,4 +118,4 @@ That sure was a lot, huh? Be sure to check out [the code samples](http://learn.v
 
 Wow! We just pieced several parts together to make one very useful test. Hopefully you feel more empowered in your testing ability. Check out [the full WebdriverIO commands API](http://webdriver.io/api.html) to see everything you now have the power to do.
 
-Tomorrow, we're looking at an improved way to catch test failures. Until then, try writing some in-depth tests on your own!
+Tomorrow, we're looking at advanced WebdriverCSS usage. Until then, try writing some in-depth tests on your own!

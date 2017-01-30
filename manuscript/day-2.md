@@ -51,10 +51,6 @@ This will be a constantly-running service. You can stop the it by pressing `Ctrl
 
 * If you're interested in why we reference `./node_modules/bin/` and a way around that, [read up on npm scripts](http://firstdoit.com/npm-scripts/).
 
-## Disclaimer
-
-For the rest of this course we'll sometimes leave out repetitive bits of the code in our examples. To see the full code, [check out the code samples for each day](http://learn.visualregressiontesting.com/code-samples.zip).
-
 ## Let's make a test!
 
 Now that we have ChromeDriver running, we can use it to run some tests. In your project folder, create a new file called `tests.js`. Open it up in your favorite code editor.
@@ -64,6 +60,8 @@ The first thing we'll do is load WebdriverIO in to the file. To do that, we'll u
 ```js
 var wdio = require("webdriverio");
 ```
+
+> **Disclaimer** For the rest of this course we're going to leave out repetitive bits of the code in our examples. To see the full code, [check out the code samples for each day](http://learn.visualregressiontesting.com/code-samples.zip).
 
 With that loaded, our next step is to set up a browser instance.
 

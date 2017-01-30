@@ -1,7 +1,11 @@
 {
   "name": "@visualregressiontesting/code-samples",
   "version": "1.0.0",
-  "devDependencies": {},
+  "devDependencies": {
+    "wdio-dot-reporter": "0.0.7",
+    "wdio-mocha-framework": "^0.5.8",
+    "wdio-selenium-standalone-service": "0.0.7"
+  },
   "scripts": {
     "test": "mocha"
   },
@@ -9,6 +13,7 @@
   "main": "day-2.js",
   "dependencies": {
     "chromedriver": "^2.27.2",
+    "mocha": "^3.2.0",
     "webdrivercss": "github:visualregressiontesting/webdrivercss",
     "webdriverio": "^4.6.1"
   }

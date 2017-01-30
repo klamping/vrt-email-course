@@ -1,185 +1,123 @@
-# Catch Failures the Lazy Way
+# Advanced WebdriverCSS Usage
 
-So far, we've been doing our fair share of manual work when running the tests. Every time we execute our test suite, we have to check the screenshots folder for diffs and read the console logs to verify the right content appears.
+As you advance in your test writing capabilities, you'll find yourself in situations where a plain ol' screenshot just won't work. Maybe you need to test all images in three different resolutions, or you need to hide some text because it's always changing. 
 
-In our attempt to automate our work, we haven't really automated it, because the program does not report errors and prevent mistakes from being deployed. Thankfully, we can steal a trick from the unit testing book and use a technique called "assertions."
+Good news, WebdriverCSS has you covered.
 
-## What are Assertions?
+## Customize the setup
 
-Assertions allow us to compare and validate two values, like "x should equal y" and "z should be larger than x".
+When we first set up WebdriverCSS, we glossed over the fact that you can customize some global options it has. 
 
-In functional testing, we can use assertions to validate page titles, element visibility, screenshot matches and more.
-
-For example, in our last test we navigated from the homepage to the project page. We also print out the url of the project page, to check that we're on the new page.
-
-Our assertion for this would be "The page url contains 'project'".
-
-Assertions are very similar to website requirements. "The link should change color on hover" is a simple functional test assertion. In fact, if you have a requirements document for you site, that's a great place to determine what tests you should write.
-
-## Writing Assertions
-
-[Node comes with an assertion library built-in](https://nodejs.org/docs/latest/api/assert.html). Let's use it to keep things simple.
-
-We'll load it the same way we loaded WebdriverIO, by using a `require` statement:
+When initializing WebdriverCSS, our command usually looks like:
 
 ```js
-var assert = require("assert");
+require('webdrivercss').init(browser);
 ```
 
-A basic assertion with it looks like:
+There's a second argument we can pass in to that 'init' call; an configuration object which defines these aspects of our screenshots:
+
+- `screenshotRoot`
+	- By default, screenshots are all saved to the './webdrivercss' folder. By passing in a custom path, we can change where all the baseline screenshots are saved.  
+- `failedComparisonsRoot`
+	- Similar to `screenshotRoot`, this option defines where to store the 'diff' images. It defaults to `./webdrivercss/diff`.
+- `misMatchTolerance`
+	- A number between 0 and 100 (default is 0.05) that defines the degree of mismatch to consider two images as identical. Increase the number to be less strict in comparisons; decrease to define smaller difference limits.
+- `screenWidth` Numbers[] ( default: [] )
+	- When defined, will cause every capture to be taken in the different screen widths requested
+- `updateBaseline`
+	- Set this to true to automatically update the baseline images with the latest capture. Useful for when you make an update to your design and want to redefine the images.
+
+Here's what these options would look like in regular use:
 
 ```js
-var x = 1;
-assert.equal(x, 1); // Passes
+require('webdrivercss').init(browser, {
+    // example options
+    screenshotRoot: 'my-shots',
+    failedComparisonsRoot: 'diffs',
+    misMatchTolerance: 0.05,
+    screenWidth: [320,480,640,1024],
+    updateBaseline: true
+});
 ```
 
-This validates that the value of `x` is `1`. If we instead asserted:
+## Customize a screenshot
+
+In our previous usage of the WebdriverCSS command, we showed example code but didn't go on to detail on the function itself. Let's do that now!
+
+The `webdrivercss` function takes 3 different parameters:
+
+1. __An ID__: Each WebdriverCSS test needs to have a unique ID. This value will be the prefix for all of the screenshot file names, and should therefore follow traditional naming conventions like no spaces, dashes, or special characters.
+2. __Options__: an array of option objects, each one representing a different part of the page that you would like to test. Properties in the objects include:
+  1. __name__: Name of the captured element
+  2. __elem__: Selector of the element you want to capture
+  3. __width__: You can specify a fixed width for your screenshot
+  4. __height__: You can specify a fixed height for your screenshot
+  5. __x__: You can specify a fixed x coordinate for your screenshot (requires width/height)
+  6. __y__: You can specify a fixed y coordinate for your screenshot (requires width/height)
+  7. __screenWidth__: Pass through an array of screen widths to test this element at
+  8. Various other [properties to hide, remove or exclude](https://github.com/webdriverio/webdrivercss/tree/beta-rc1#usage) parts of the page, which can be useful in order to ignore dynamic components such as advertisements. We'll talk about these in a moment.
+3. __The Callback__: This function answers the "Ok I've got all of these images, what do I do now"? We'll leave it alone, but [you can customize it gain information on the status of your screenshot comparisons](https://github.com/webdriverio/webdrivercss#let-your-test-fail-when-screenshots-differ).
+
+Here's what a fully customized capture could look like:
 
 ```js
-var x = 1;
-assert.equal(x, 2);
+webdrivercss('startpage',[
+    {
+        name: 'header',
+        elem: '#header'
+    }, {
+        name: 'hero',
+        elem: '#hero'
+    }, {
+        name: 'headerbar',
+        x: 110,
+        y: 15,
+        width: 980,
+        height: 34,
+        screenWidth: [1200]
+    }
+])
 ```
 
-That would fail and the code would error out. We could instead assert that `x` does not equal 2:
+[You can peruse through all the options via the documentation](https://github.com/webdriverio/webdrivercss#usage).
+
+## Excluding, hiding and removing
+
+We mentioned the ability to hide content, but didn't show you an example. That's because it deserves its own shoutout. 
+
+Sometimes it is unavoidable that content constantly changes inside of a screenshot. This would break all your tests, all the time.
+
+To prevent this you can determine areas, which will either be excluded, hidden or removed.  
+
+- Excluded
+	- This will cause the area or element defined to be covered in black
+- Hidden
+	- This will cause the element defined to have 'visibility: hidden' applied to it. It will still take up space on the page, only being invisible.
+- Removed
+	- Uses 'display: none' to remove the defined element from the page, as if the element didn't exist on the page at all.
+
+Wanna see what that looks like? Of course you do!
 
 ```js
-var x = 1;
-assert.notEqual(x, 2);
+.webdrivercss('header', {
+    name: 'header',
+    elem: '#header',
+    exclude: ['#leaderboard-ad', '#mini-ad'],
+    hide: '.username',
+    remove: '#date'
+});
 ```
 
-And this would pass, as 1 does not equal 2 (at least not in this universe).
+## Managing Baseline images
 
-## WebdriverIO and Assertions
+This is the last thing we'll talk about today.
 
-How does this relate to our needs? Well, first, we can use `assert` in our `getUrl` check:
+If you're using a version control system like Git, we recommend storing baseline images in it like any other file (although you may want to [use a `.gitignore` file](https://github.com/webdriverio/webdrivercss/blob/master/examples/.gitignore) to skip the `.regression.` and `diff` images). This makes it simple to share baseline images across teams. It also allows for changes in the baseline to be tracked over time and viewed in pull requests.
 
-```js
-var assert = require("assert");
+Be aware that if team members or testing platforms are not using the same OS, the baseline images might differ slightly. A common example is that a baseline will work for local testing on OSX, but the same baseline image fails when TravisCI runs the same visual regression test since it is Linux-based.
 
-browser.url("http://outdatedbrowser.com/en")
-		... other steps here ...
-		.getUrl().then(function(url) {
-        console.log("Page url is: " + url);
-    })
-    .end();
-```
+## Updating baseline images
 
-`assert.ok` checks that the value passed in is truthy, which is what we want `isFormVisible` to be.
+Eventually our design is going to change, and when it does, we need to make sure that our new baseline images accompany our style changes.
 
-So, what's the different between this and just running `console.log`? Well, if there's an assertion error, your test will throw an error and fail, without you having to read anything. That makes it incredibly easy to know if your functional tests passed.
-
-As an added bonus, Node will send a failing [exit code](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/) back to the computer, which can be tied in to a Continuous Integration tool like [Jenkins](https://jenkins-ci.org/) or [TravisCI](https://travis-ci.org/) to mark a build as failed (if you're interested in more on the CICD process, we hope to release an in-depth Visual Regression Testing course later this year which will cover it all).
-
-## Asserting Screenshots
-
-We mentioned having to check for screenshot diffs at the beginning of today's lesson. Does that imply that we can "assert" our way out of it? Why yes, yes it does!
-
-The `webdrivercss` command has a special option which allows you to run a function after the screenshot and comparison are done. It will pass the results of the test to that function, and we can use those results in our assertions.
-
-
-```js
-var assert = require("assert");
-
-var emailSignup = {
-    name: "Form",
-    elem: ".email-signup"
-};
-
-browser
-    .init()
-    .url("http://learn.visualregressiontesting.com")
-    .webdrivercss("Signup", emailSignup, function (err, shots) {
-        assert.ifError(err);
-        assert.ok(shots.Form[0].isWithinMisMatchTolerance);
-    })
-    .end();
-```
-
-We assert two things:
-
-1. That `err` isn't an error (if it is, something went wrong)
-2. The `shots.Form[0].isWithinMisMatchTolerance` value is true, which means that the comparison passed the test. Yippee!
-
-That's fairly simple, but if it looks complex to you, we have bad news. Because of the way WebdriverCSS passes in the `shots` value, and the fact that you can define multiple elements to screen capture per `webdrivercss` call, things get even more complicated.
-
-It would be a waste of email to get in to the real details of it all, so you're going to have to take our word for it ([or read about it in the docs](https://github.com/webdriverio/webdrivercss#let-your-test-fail-when-screenshots-differ) if you must). This next code snippet is a little code heavy. Take a deep breath and let's plunge in (don't worry, you don't have to memorize all of this):
-
-```js
-var assert = require("assert");
-
-var emailSignup = { ... };
-
-browser
-    .init()
-    .url("http://learn.visualregressiontesting.com")
-    .webdrivercss("Signup", emailSignup, function (err, shots) {
-        assert.ifError(err);
-
-        Object.keys(shots).forEach(function(element) {
-            shots[element].forEach(function(shot) {
-              assert.ok(shot.isWithinMisMatchTolerance, shot.message);
-            })
-        });
-    })
-    .end();
-```
-
-Here, we loop through all the shots taken, then assert each shot combo for `isWithinMisMatchTolerance`. 
-
-While this is a much more adaptable solution, it's pretty verbose. Seeing as we don't want to repeat that same piece of code throughout our tests, we can make it a standalone function and call it when needed:
-
-```js
-function assertShots (err, shots) {
-  assert.ifError(err);
-
-  Object.keys(shots).forEach(function(element) {
-    shots[element].forEach(function(shot) {
-      assert.ok(shot.isWithinMisMatchTolerance, shot.message);
-    })
-  });
-};
-
-var assert = require("assert");
-
-var emailSignup = {...};
-
-var emailField = ".email"
-
-browser
-    .init()
-    .url("http://learn.visualregressiontesting.com")
-    .webdrivercss("Signup", emailSignup, assertShots)
-    .scroll(emailField)
-    .setValue(emailField, "learn@visualregressiontesting.com")
-    .webdrivercss("Signup with email", emailSignup, assertShots)
-    .end();
-```
-
-In each of our WebdriverCSS calls we pass in our assertion function, which programmatically handles checking that everything turned out as planned.
-
-If you'd like the function as an easy copy/paste solution, have a look at [the special gist created just for you](https://gist.github.com/klamping/cd32298696ee92b50819).
-
-## Summing up
-
-```js
-assert.equal(theEnd, true);
-```
-
-Okay, apologies for the nerd humor there. That was a lot of content to go through and we're happy to have it done. Assertions are a very powerful tool to bring in to your testing arsenal.
-
-While Node's `assert` library is useful for getting started, it's missing a lot of great features. Check out these tools to really take advantage of the "assertion" concept:
-
-- [Chai Assertion Library](http://chaijs.com/)
-- [Chai Webdriver](http://chaijs.com/plugins/chai-webdriver)
-- [Should.js](https://github.com/shouldjs/should.js)
-- [Mocha Test Runner](http://mochajs.org/)
-- [WebdriverCSS example with Mocha assertions](https://github.com/webdriverio/webdrivercss/blob/master/examples/webdrivercss.browserstack.with.mocha.js) written by [The Great Chris Ruppel](https://twitter.com/rupl)
-- [Jasmine Test Runner](http://jasmine.github.io/)
-
-Tomorrow we'll wrap up the week with a "what's next" outlook. Until then, give yourself a pat on the back for completing the meat and potatoes of this course!
-
-Okay, one last bit of fun:
-
-```js
-assert.equal(youAreAwesome, true);
-```
+If we increase the font size of our main header, our commit should include not just the new css, but the new baseline file as well. The reason for this is so that the next person that downloads our new CSS will also have a baseline image of our header with that larger text.
