@@ -45,7 +45,7 @@ So far there's nothing new. We've moved our WebdriverCSS selector to its own var
 
 ## Clicking around
 
-The navigation on outdatedbrowser.com is hidden by default behind a friendly hamburger icon. After haven taken a picture of this icon using WebdriverCSS, we should click it to open the menu.
+The navigation on outdatedbrowser.com is hidden by default behind a friendly hamburger icon. After having taken a picture of this icon using WebdriverCSS, we should click it to open the menu.
 
 To do this, we're going to use the 'click' command. And just like with the WebdriverCSS command, we'll pass in a CSS selector to specify the element we want to click:
 
@@ -114,7 +114,7 @@ We threw the `getUrl` command in just to validate we're on the right page, altho
 
 That sure was a lot, huh? Be sure to check out [the code samples](http://learn.visualregressiontesting.com/code-samples.zip) for Day 4 to see it all together.
 
-## Finishing up
+## In Review
 
 Wow! We just pieced several parts together to make one very useful test. Hopefully you feel more empowered in your testing ability. Check out [the full WebdriverIO commands API](http://webdriver.io/api.html) to see everything you now have the power to do.
 

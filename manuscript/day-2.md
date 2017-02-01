@@ -143,7 +143,7 @@ Title is: Learn Visual Regression Testing
 
 So, how does it feel to have programmatically taken control of a browser? A little awesome, right?
 
-Okay, if you're underwhelmed, that's because we didn't really test much. We only peaked at the page title then closed everything down before we got ourselves in to real trouble.
+Okay, if you're underwhelmed, that's because we didn't really test much. We only peeked at the page title then closed everything down before we got ourselves in to real trouble.
 
 We promise that over the next couple of days we'll get our hands extra dirty with mouse clicks, keyboard taps, HTML checks and very real visual tests.
 
